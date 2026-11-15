@@ -1,0 +1,13 @@
+{
+  "name": "loi-chuc-tri-an-20-11",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website gui loi chuc 20/11 va hien thi thanh trai tim",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
