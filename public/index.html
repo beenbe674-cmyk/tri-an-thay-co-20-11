@@ -11,12 +11,25 @@
 body{
  margin:0;padding:20px;min-height:100vh;
  background:radial-gradient(circle,#64172d,#260710 70%,#100208);
- color:#ffe8b0;font-family:Georgia,serif;text-align:center;
+ color:#ffe8b0;
+font-family:Arial,sans-serif;
+text-align:center;
+letter-spacing:normal;
+word-spacing:normal;
 }
 h1{color:#f5d47d;text-shadow:0 0 20px gold;font-size:clamp(28px,5vw,48px)}
 main{max-width:950px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
 .panel{padding:22px;border:1px solid #d9ad5b;border-radius:20px;background:#ffffff12}
 .heart{
+  width:180px;
+  height:180px;
+  margin:90px auto;
+  background:linear-gradient(135deg,#ff6b9a,#e60055,#ff3366);
+  position:relative;
+  transform:rotate(-45deg);
+  animation:pulse 1.5s infinite;
+  box-shadow:0 0 25px #ff4775,0 0 50px #d9ad5b;
+}
  width:180px;height:180px;margin:90px auto;
  background:linear-gradient(135deg,#ff6684,#a00032);
  position:relative;transform:rotate(-45deg);
