@@ -5,57 +5,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tri ân thầy cô 20/11</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;padding:20px;min-height:100vh;
- background:radial-gradient(circle,#64172d,#260710 70%,#100208);
- color:#ffe8b0;
-font-family:Arial,sans-serif;
-text-align:center;
-letter-spacing:normal;
-word-spacing:normal;
+* {
+  box-sizing: border-box;
 }
-h1{color:#f5d47d;text-shadow:0 0 20px gold;font-size:clamp(28px,5vw,48px)}
 
-.heart-mosaic {
-  --cols: 17;
-  width: min(100%, 520px);
-  margin: 25px auto;
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background: radial-gradient(circle, #64172d, #260710 70%, #100208);
+  color: #ffe8b0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #f5d47d;
+  text-shadow: 0 0 20px gold;
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  gap: 3px;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: start;
 }
 
-.heart-tile {
-  aspect-ratio: 1;
+.panel {
+  padding: 22px;
+  border: 1px solid #d9ad5b;
+  border-radius: 20px;
+  background: #ffffff12;
+}
+
+#messages {
+  display: grid;
+  grid-template-columns: repeat(21, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+  margin: 25px auto;
+}
+
+.item {
   min-width: 0;
+  min-height: 45px;
+  padding: 5px 2px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   overflow-wrap: anywhere;
-  text-align: center;
-  padding: 2px;
-  border-radius: 5px;
+  word-break: break-word;
+  border-radius: 9px;
+  border: 1px solid #ffb3c9;
+  background: linear-gradient(135deg, #ff7199, #c90045);
   color: white;
-  font-size: clamp(5px, 0.85vw, 10px);
-  line-height: 1.15;
-  background: linear-gradient(135deg, #ff7199, #b90043, #d9ad5b);
-  box-shadow: 0 0 7px #ff477566;
-  animation: tileIn .4s ease both;
+  font-size: 10px;
+  line-height: 1.35;
+  box-shadow: 0 0 7px #ff477555;
+  animation: appear .5s ease;
 }
 
-.heart-empty {
-  aspect-ratio: 1;
-  visibility: hidden;
+.item b {
+  color: #ffe8b0;
+  margin-bottom: 3px;
 }
 
-@keyframes tileIn {
+.empty {
+  grid-column: 1 / -1;
+  padding: 25px;
+  color: #ffe8b0;
+}
+
+@keyframes appear {
   from {
     opacity: 0;
-    transform: scale(.4);
+    transform: scale(.7);
   }
   to {
     opacity: 1;
@@ -63,157 +95,361 @@ h1{color:#f5d47d;text-shadow:0 0 20px gold;font-size:clamp(28px,5vw,48px)}
   }
 }
 
-@media(max-width:700px) {
-  .heart-mosaic {
-    gap: 2px;
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0;
+  border-radius: 9px;
+  border: 1px solid #e6c16b;
+  font-size: 15px;
+}
+
+textarea {
+  height: 110px;
+  resize: vertical;
+}
+
+button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #d9a63e, #ffe7a0);
+  color: #451020;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+#qrcode {
+  background: white;
+  padding: 8px;
+  display: inline-block;
+}
+
+.float {
+  position: fixed;
+  bottom: -30px;
+  animation: fly 8s linear forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes fly {
+  to {
+    transform: translateY(-110vh) rotate(50deg);
+    opacity: 0;
   }
 }
-@keyframes pulse{50%{scale:1.1}}
-input,textarea{
- width:100%;padding:13px;margin:8px 0;border-radius:9px;
- border:1px solid #e6c16b;font-size:15px;
+
+@media(max-width:700px) {
+  body {
+    padding: 10px;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+
+  #messages {
+    gap: 3px;
+  }
+
+  .item {
+    min-height: 42px;
+    padding: 3px 1px;
+    font-size: 8px;
+    border-radius: 5px;
+  }
 }
-textarea{height:110px}
-button{
- padding:12px 22px;border:0;border-radius:30px;
- background:linear-gradient(90deg,#d9a63e,#ffe7a0);
- color:#451020;font-weight:bold;cursor:pointer;
-}
-#messages{max-height:180px;overflow:auto;text-align:left;font:14px Arial}
-.item{padding:9px;border-bottom:1px solid #d9ad5b55}
-#qrcode{background:white;padding:8px;display:inline-block}
-.float{position:fixed;bottom:-30px;animation:fly 8s linear forwards;pointer-events:none}
-@keyframes fly{to{transform:translateY(-110vh) rotate(50deg);opacity:0}}
-@media(max-width:700px){main{grid-template-columns:1fr}}
 </style>
 </head>
+
 <body>
+
 <h1>♥ Tri ân thầy cô 20/11 ♥</h1>
+
 <p>Mỗi lời chúc là một đóa hoa gửi đến người lái đò thầm lặng.</p>
 
 <main>
+
 <section class="panel">
-<div id="heartMosaic"
-     class="heart-mosaic"
-     aria-label="Trái tim được ghép từ lời chúc">
-</div>
-<p id="mosaicCount">Đang tải những mảnh ghép yêu thương...</p>
- <h2>Lời chúc yêu thương</h2>
- <div id="messages"></div>
+
+  <h2>♥ Trái tim lời chúc ♥</h2>
+
+  <p>Từng lời chúc nhỏ ghép thành một trái tim lớn!</p>
+
+  <div id="messages">
+    <p class="empty">Đang tải những lời chúc yêu thương...</p>
+  </div>
+
 </section>
 
 <section class="panel">
- <h2>Gửi lời chúc đến thầy cô</h2>
- <form id="form">
-  <input id="name" maxlength="32" placeholder="Tên của bạn / Tập thể lớp" required>
-  <textarea id="message" maxlength="180" placeholder="Viết lời chúc của bạn..." required></textarea>
-  <button type="submit">GỬI LỜI CHÚC ♥</button>
- </form>
- <p id="status"></p>
- <h3>Quét QR để gửi lời chúc</h3>
- <div id="qrcode"></div>
- <p><button id="copy">Sao chép đường link</button></p>
+
+  <h2>Gửi lời chúc đến thầy cô</h2>
+
+  <form id="form">
+
+    <input
+      id="name"
+      maxlength="32"
+      placeholder="Tên của bạn / Tập thể lớp"
+      required
+    >
+
+    <textarea
+      id="message"
+      maxlength="180"
+      placeholder="Viết lời chúc của bạn..."
+      required
+    ></textarea>
+
+    <button type="submit">
+      GỬI LỜI CHÚC ♥
+    </button>
+
+  </form>
+
+  <p id="status"></p>
+
+  <h3>Quét QR để gửi lời chúc</h3>
+
+  <div id="qrcode"></div>
+
+  <p>
+    <button id="copy">Sao chép đường link</button>
+  </p>
+
 </section>
+
 </main>
 
 <script>
-const $=id=>document.getElementById(id);
-new QRCode($("qrcode"),{text:location.href,width:130,height:130});
 
-$("copy").onclick=async()=>{
- try{await navigator.clipboard.writeText(location.href);$("status").textContent="Đã sao chép đường link!";}
- catch(e){$("status").textContent=location.href;}
+const $ = id => document.getElementById(id);
+
+// Tạo mã QR
+new QRCode($("qrcode"), {
+  text: location.href,
+  width: 130,
+  height: 130
+});
+
+// Sao chép đường link
+$("copy").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(location.href);
+    $("status").textContent = "Đã sao chép đường link!";
+  } catch(e) {
+    $("status").textContent = location.href;
+  }
 };
 
-function safe(s){
- return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+// Chống chèn mã HTML độc hại
+function safe(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
 }
 
-async function loadMessages(){
- try{
-  const r=await fetch("/api/messages");
-  if(!r.ok)return;
-  const data=await r.json();
- 
-$("#messages").style.display = "grid";
+// Tạo vị trí các mảnh ghép thành trái tim
+function makeHeartCells(total) {
 
-const cols = 13;
-let rows = Math.max(7, Math.ceil(data.length / 6));
-let cells = [];
+  const cols = 21;
+  let rows = Math.max(9, Math.ceil(total / 9));
+  let cells = [];
 
-while (cells.length < data.length) {
-  cells = [];
+  while (true) {
 
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const x = (c - 6) / 6;
-      const y = (rows / 2 - r) / (rows / 2);
+    cells = [];
 
-      if (Math.pow(x*x + y*y - 1, 3) - x*x*y*y*y <= 0) {
-        cells.push({r, c});
+    for (let r = 0; r < rows; r++) {
+
+      for (let c = 0; c < cols; c++) {
+
+        const x = (c - (cols - 1) / 2) / (cols / 2) * 1.3;
+
+        const y = (rows / 2 - r - 0.5) / (rows / 2) * 1.3;
+
+        const heart =
+          Math.pow(x*x + y*y - 1, 3)
+          - x*x*y*y*y;
+
+        if (heart <= 0) {
+          cells.push({r, c});
+        }
+
       }
     }
+
+    if (cells.length >= total) break;
+
+    rows += 2;
   }
 
-  rows++;
+  return {cells, rows, cols};
 }
 
-$("#messages").style.gridTemplateColumns =
-  `repeat(${cols}, minmax(0, 1fr))`;
+// Tải và hiển thị tất cả lời chúc
+async function loadMessages() {
 
-$("#messages").style.gap = "6px";
+  try {
 
-$("#messages").innerHTML = data.map((m, i) => {
-  const p = cells[i];
+    const r = await fetch("/api/messages");
 
-  return `<div class="item"
-    style="grid-column:${p.c + 1};
-    grid-row:${p.r + 1};">
-    <b>${safe(m.name)}</b><br>
-    ${safe(m.message)}
-  </div>`;
-}).join("");
+    if (!r.ok) return;
 
- }catch(e){}
+    const data = await r.json();
+
+    const box = $("messages");
+
+    if (!data.length) {
+      box.innerHTML =
+        '<p class="empty">Hãy là người đầu tiên gửi lời chúc nhé! ♥</p>';
+      return;
+    }
+
+    // Lấy toàn bộ lời chúc, mới nhất trước
+    const messages = [...data].reverse();
+
+    const layout = makeHeartCells(messages.length);
+
+    box.style.gridTemplateColumns =
+      `repeat(${layout.cols}, minmax(0, 1fr))`;
+
+    box.style.gridTemplateRows =
+      `repeat(${layout.rows}, minmax(45px, auto))`;
+
+    box.innerHTML = messages.map((m, i) => {
+
+      // Phân bố đều các lời chúc trong hình trái tim
+      const index = messages.length === 1
+        ? Math.floor(layout.cells.length / 2)
+        : Math.round(
+            i * (layout.cells.length - 1) /
+            (messages.length - 1)
+          );
+
+      const p = layout.cells[index];
+
+      return `
+        <div class="item"
+          style="
+            grid-column:${p.c + 1};
+            grid-row:${p.r + 1};
+          ">
+          <b>${safe(m.name)}</b>
+          <span>${safe(m.message)}</span>
+        </div>
+      `;
+
+    }).join("");
+
+  } catch(e) {
+    console.error("Lỗi tải lời chúc:", e);
+  }
+
 }
 
-$("form").onsubmit=async e=>{
- e.preventDefault();
- const btn=e.submitter;
- btn.disabled=true;
- $("status").textContent="Đang gửi...";
- try{
-  const r=await fetch("/api/messages",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({
-    name:$("name").value,
-    message:$("message").value
-   })
-  });
-  const result=await r.json();
-  if(!r.ok)throw new Error(result.error||"Gửi thất bại");
-  $("message").value="";
-  $("status").textContent="♥ Gửi lời chúc thành công!";
-  await loadMessages();
- }catch(err){
-  $("status").textContent=err.message;
- }finally{btn.disabled=false;}
+// Gửi lời chúc
+$("form").onsubmit = async e => {
+
+  e.preventDefault();
+
+  const btn = e.submitter;
+
+  btn.disabled = true;
+
+  $("status").textContent = "Đang gửi...";
+
+  try {
+
+    const r = await fetch("/api/messages", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        name: $("name").value,
+
+        message: $("message").value
+
+      })
+
+    });
+
+    const result = await r.json();
+
+    if (!r.ok) {
+      throw new Error(result.error || "Gửi thất bại");
+    }
+
+    $("message").value = "";
+
+    $("status").textContent =
+      "♥ Gửi lời chúc thành công!";
+
+    await loadMessages();
+
+  } catch(err) {
+
+    $("status").textContent = err.message;
+
+  } finally {
+
+    btn.disabled = false;
+
+  }
+
 };
 
-function floating(){
- const el=document.createElement("span");
- el.className="float";
- el.textContent=Math.random()>.4?"♥":"✦";
- el.style.left=Math.random()*100+"vw";
- el.style.color="#f5d47d";
- el.style.fontSize="22px";
- document.body.appendChild(el);
- setTimeout(()=>el.remove(),8500);
+// Hiệu ứng trái tim bay
+function floating() {
+
+  const el = document.createElement("span");
+
+  el.className = "float";
+
+  el.textContent = Math.random() > .4 ? "♥" : "✦";
+
+  el.style.left = Math.random() * 100 + "vw";
+
+  el.style.color = "#f5d47d";
+
+  el.style.fontSize = "22px";
+
+  document.body.appendChild(el);
+
+  setTimeout(() => el.remove(), 8500);
+
 }
-setInterval(floating,600);
+
+setInterval(floating, 600);
+
+// Khởi động
 loadMessages();
-setInterval(loadMessages,5000);
+
+// Tự động cập nhật mỗi 5 giây
+setInterval(loadMessages, 5000);
+
 </script>
+
 </body>
 </html>
