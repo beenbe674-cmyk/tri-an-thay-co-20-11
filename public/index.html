@@ -21,26 +21,19 @@ h1{color:#f5d47d;text-shadow:0 0 20px gold;font-size:clamp(28px,5vw,48px)}
 main{max-width:950px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
 .panel{padding:22px;border:1px solid #d9ad5b;border-radius:20px;background:#ffffff12}
 .heart{
-  width:180px;
-  height:180px;
-  margin:90px auto;
-  background:linear-gradient(135deg,#ff6b9a,#e60055,#ff3366);
-  position:relative;
-  transform:rotate(-45deg);
+  width:240px;
+  height:220px;
+  margin:50px auto;
+  background:linear-gradient(135deg,#ff7199,#ff0055,#c90045);
+  clip-path:path("M 120 210 C 100 190 5 115 5 65 C 5 5 80 -5 120 45 C 160 -5 235 5 235 65 C 235 115 140 190 120 210 Z");
   animation:pulse 1.5s infinite;
-  box-shadow:0 0 25px #ff4775,0 0 50px #d9ad5b;
+  filter:drop-shadow(0 0 20px #ff4775);
+  position:relative;
 }
-
-.heart:before,.heart:after{
- content:"";position:absolute;width:180px;height:180px;
- background:inherit;border-radius:50%;
-}
-.heart:before{top:-90px;left:0}
-.heart:after{left:90px;top:0}
 .heart-content{
- position:absolute;inset:0;transform:rotate(45deg);
+ position:absolute;inset:0;transform:none;
  z-index:2;display:flex;align-items:center;justify-content:center;
- flex-direction:column;width:180px;height:180px;padding:15px;
+flex-direction:column;width:240px;height:220px;padding:15px;
  color:white;font-family:Arial;font-size:13px;
 }
 @keyframes pulse{50%{scale:1.1}}
