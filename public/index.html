@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tri ân thầy cô 20/11</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
@@ -58,7 +59,7 @@ h2 {
   font-size: 23px;
 }
 
-/* TRÁI TIM LỚN */
+/* TRÁI TIM */
 
 .heart-board {
   position: relative;
@@ -66,7 +67,7 @@ h2 {
   max-width: 650px;
   min-height: 480px;
   margin: 20px auto;
-  padding: 95px 9% 65px;
+  padding: 55px 3% 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +79,6 @@ h2 {
   inset: 0;
   width: 100%;
   height: 100%;
-  overflow: visible;
   pointer-events: none;
   z-index: 0;
 }
@@ -103,6 +103,74 @@ h2 {
   }
 }
 
+/* LỜI CHÚC XẾP THÀNH TRÁI TIM */
+
+#messages {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  justify-items: center;
+  align-items: stretch;
+}
+
+.note {
+  min-width: 0;
+  width: 100%;
+  min-height: 105px;
+  padding: 10px 8px;
+  text-align: left;
+  border-radius: 10px;
+  color: #583346;
+  background: #fff0b8;
+  box-shadow: 2px 5px 12px #16040b55;
+  overflow-wrap: anywhere;
+  position: relative;
+  animation: appear 0.5s ease both;
+}
+
+.note:nth-child(3n+2) {
+  background: #ffdce7;
+}
+
+.note:nth-child(3n) {
+  background: #e5f0d9;
+}
+
+.note:nth-child(4n) {
+  background: #e4e4ff;
+}
+
+.note-name {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #a77b8a;
+}
+
+.note-message {
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .heart-empty {
   position: relative;
   z-index: 1;
@@ -122,82 +190,8 @@ h2 {
 }
 
 @keyframes beat {
-  50% { transform: scale(1.16); }
-}
-
-/* CÁC TẤM NOTE */
-
-
-#messages {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 540px;
-  margin: 0 auto;
-  padding: 35px 9% 45px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  clip-path: polygon(
-    50% 96%, 5% 55%, 0% 38%, 2% 22%,
-    12% 10%, 27% 7%, 40% 14%, 50% 27%,
-    60% 14%, 73% 7%, 88% 10%, 98% 22%,
-    100% 38%, 95% 55%
-  );
-}
-
-.note {
-  min-width: 0;
-  min-height: 105px;
-  padding: 12px 10px;
-  text-align: left;
-  border-radius: 8px;
-  color: #583346;
-  background: #fff0b8;
-  box-shadow: 2px 5px 12px #16040b55;
-  transform: rotate(-1deg);
-  overflow-wrap: anywhere;
-  animation: appear 0.5s ease both;
-  position: relative;
-}
-
-.note:nth-child(3n+2) {
-  background: #ffdce7;
-  transform: rotate(1.5deg);
-}
-
-.note:nth-child(3n) {
-  background: #e5f0d9;
-  transform: rotate(-1.5deg);
-}
-
-.note:nth-child(4n) {
-  background: #e4e4ff;
-}
-
-.note-name {
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
-  border-bottom: 1px dashed #a77b8a;
-}
-
-.note-message {
-  font-size: 12px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(15px) rotate(0deg);
-  }
-  to {
-    opacity: 1;
+  50% {
+    transform: scale(1.16);
   }
 }
 
@@ -278,7 +272,7 @@ button:disabled {
   margin-top: 8px;
 }
 
-/* HIỆU ỨNG TRÁI TIM BAY */
+/* TRÁI TIM BAY */
 
 .float {
   position: fixed;
@@ -313,25 +307,25 @@ button:disabled {
 
   .heart-board {
     min-height: 360px;
-    padding: 75px 8% 45px;
+    padding: 45px 2% 35px;
   }
 
   #messages {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
   }
 
   .note {
-    min-height: 100px;
-    padding: 10px 8px;
+    min-height: 95px;
+    padding: 8px 6px;
   }
 
   .note-name {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .note-message {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 </style>
@@ -348,6 +342,7 @@ button:disabled {
 <main>
 
 <!-- KHU VỰC TRÁI TIM -->
+
 <section class="panel">
 
   <h2>♥ Trái tim tri ân ♥</h2>
@@ -356,7 +351,7 @@ button:disabled {
 
     <svg class="heart-outline"
          viewBox="0 0 500 460"
-         preserveAspectRatio="none">
+         preserveAspectRatio="xMidYMid meet">
       <path d="M250 435
       C220 405 25 265 25 145
       C25 35 155 5 250 105
@@ -381,6 +376,7 @@ button:disabled {
 </section>
 
 <!-- KHU VỰC GỬI LỜI CHÚC -->
+
 <section class="panel">
 
   <h2>Gửi lời chúc đến thầy cô</h2>
@@ -427,13 +423,17 @@ button:disabled {
 const $ = id => document.getElementById(id);
 
 // TẠO QR CODE
-new QRCode($("qrcode"), {
-  text: location.href,
-  width: 150,
-  height: 150
-});
+
+if (typeof QRCode !== "undefined") {
+  new QRCode($("qrcode"), {
+    text: location.href,
+    width: 150,
+    height: 150
+  });
+}
 
 // SAO CHÉP ĐƯỜNG LINK
+
 $("copy").onclick = async () => {
   try {
     await navigator.clipboard.writeText(location.href);
@@ -443,32 +443,90 @@ $("copy").onclick = async () => {
   }
 };
 
-// CHỐNG CHÈN HTML KHÔNG AN TOÀN
-function safe(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[c]));
+// TÍNH VỊ TRÍ CÁC NOTE THEO HÌNH TRÁI TIM
+
+function getHeartSlots(count, cols) {
+  let rows = 5;
+  let slots = [];
+
+  while (rows <= 120) {
+    slots = [];
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+
+        const x = ((c + 0.5) / cols) * 2.6 - 1.3;
+        const y = 1.15 - ((r + 0.5) / rows) * 2.3;
+
+        const value =
+          Math.pow(x * x + y * y - 1, 3)
+          - x * x * Math.pow(y, 3);
+
+        if (value <= 0) {
+          slots.push({
+            row: r,
+            col: c
+          });
+        }
+      }
+    }
+
+    if (slots.length >= count) break;
+
+    rows++;
+  }
+
+  if (count === 1) {
+    return {
+      rows,
+      slots: [{
+        row: Math.floor(rows / 2),
+        col: Math.floor(cols / 2)
+      }]
+    };
+  }
+
+  const selected = [];
+
+  for (let i = 0; i < count; i++) {
+    const index = Math.round(
+      i * (slots.length - 1) / (count - 1)
+    );
+
+    selected.push(slots[index]);
+  }
+
+  return {
+    rows,
+    slots: selected
+  };
 }
 
-// HIỂN THỊ TẤT CẢ LỜI CHÚC
+// HIỂN THỊ LỜI CHÚC
+
+let lastRenderedData = "";
+
 async function loadMessages() {
   try {
     const r = await fetch("/api/messages");
 
-    if (!r.ok) return;
+    if (!r.ok) {
+      throw new Error("Không tải được lời chúc.");
+    }
 
     const data = await r.json();
-
     const messages = Array.isArray(data) ? data : [];
 
     const box = $("messages");
 
+    const currentData = JSON.stringify(messages);
+
+    if (currentData === lastRenderedData) return;
+
+    lastRenderedData = currentData;
+
     if (messages.length === 0) {
-      box.innerHTML = "";
+      box.replaceChildren();
       $("emptyHeart").style.display = "block";
       $("messageCount").textContent =
         "Chờ những lời chúc đầu tiên ♥";
@@ -477,15 +535,49 @@ async function loadMessages() {
 
     $("emptyHeart").style.display = "none";
 
-    // Hiển thị TOÀN BỘ lời chúc
-    box.innerHTML = messages.map((m, index) => `
-      <div class="note" style="animation-delay:${Math.min(index * 0.04, 1)}s">
-        <span class="note-name">
-          ♥ ${safe(m.name || "Ẩn danh")}
-        </span>
-        <div class="note-message">${safe(m.message || "")}</div>
-      </div>
-    `).join("");
+    // Tự điều chỉnh số cột theo thiết bị
+
+    const cols = window.matchMedia("(max-width: 700px)").matches
+      ? 3
+      : 5;
+
+    const layout = getHeartSlots(messages.length, cols);
+
+    box.style.gridTemplateColumns =
+      `repeat(${cols}, minmax(0, 1fr))`;
+
+    box.style.gridTemplateRows =
+      `repeat(${layout.rows}, minmax(105px, auto))`;
+
+    box.replaceChildren();
+
+    // Đặt từng lời chúc vào vị trí trái tim
+
+    messages.forEach((m, index) => {
+
+      const slot = layout.slots[index];
+
+      const note = document.createElement("div");
+      note.className = "note";
+
+      note.style.gridColumn = String(slot.col + 1);
+      note.style.gridRow = String(slot.row + 1);
+      note.style.animationDelay =
+        `${Math.min(index * 0.04, 1)}s`;
+
+      const name = document.createElement("span");
+      name.className = "note-name";
+      name.textContent = "♥ " + (m.name || "Ẩn danh");
+
+      const message = document.createElement("div");
+      message.className = "note-message";
+      message.textContent = m.message || "";
+
+      note.appendChild(name);
+      note.appendChild(message);
+
+      box.appendChild(note);
+    });
 
     $("messageCount").textContent =
       `♥ ${messages.length} lời chúc đã cùng tạo nên trái tim!`;
@@ -496,10 +588,13 @@ async function loadMessages() {
 }
 
 // GỬI LỜI CHÚC
+
 $("form").onsubmit = async e => {
   e.preventDefault();
 
-  const btn = e.submitter;
+  const btn = e.submitter ||
+    $("form").querySelector('button[type="submit"]');
+
   btn.disabled = true;
 
   $("status").textContent = "Đang gửi lời chúc...";
@@ -519,13 +614,17 @@ $("form").onsubmit = async e => {
     const result = await r.json();
 
     if (!r.ok) {
-      throw new Error(result.error || "Gửi lời chúc thất bại!");
+      throw new Error(
+        result.error || "Gửi lời chúc thất bại!"
+      );
     }
 
     $("message").value = "";
 
     $("status").textContent =
       "♥ Gửi lời chúc thành công! Cảm ơn bạn nhé!";
+
+    lastRenderedData = "";
 
     await loadMessages();
 
@@ -538,6 +637,7 @@ $("form").onsubmit = async e => {
 };
 
 // HIỆU ỨNG TRÁI TIM BAY
+
 function floating() {
   const el = document.createElement("span");
 
@@ -552,7 +652,15 @@ function floating() {
   setTimeout(() => el.remove(), 8500);
 }
 
+// TỰ CẬP NHẬT KHI ĐỔI KÍCH THƯỚC MÀN HÌNH
+
+window.addEventListener("resize", () => {
+  lastRenderedData = "";
+  loadMessages();
+});
+
 // KHỞI ĐỘNG
+
 setInterval(floating, 600);
 
 loadMessages();
