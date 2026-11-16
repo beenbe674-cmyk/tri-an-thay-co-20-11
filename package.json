@@ -1,3 +1,4 @@
+
 {
   "name": "loi-chuc-tri-an-20-11",
   "version": "1.0.0",
@@ -8,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "@supabase/supabase-js": "^2.57.0"
   }
 }
