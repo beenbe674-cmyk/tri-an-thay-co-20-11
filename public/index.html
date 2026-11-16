@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -352,6 +352,131 @@ button:disabled {
   margin-top: 8px;
 }
 
+/* SỔ LƯU BÚT */
+
+.guestbook-section {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 25px;
+  border: 1px solid #d9ad5b;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 10px 35px #10020855;
+}
+
+.guestbook-section h2 {
+  color: #ffe4a0;
+}
+
+.guestbook-intro {
+  color: #ffe5bd;
+  line-height: 1.7;
+}
+
+.guestbook-form {
+  max-width: 650px;
+  margin: 20px auto;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  display: block;
+}
+
+.guestbook-form textarea {
+  min-height: 130px;
+}
+
+.guestbook-form label {
+  display: block;
+  text-align: left;
+  margin-top: 12px;
+  color: #ffe5bd;
+  font-weight: bold;
+}
+
+.guestbook-form input[type="file"] {
+  background: #fffaf1;
+  color: #48202d;
+}
+
+.photo-hint {
+  color: #ffe5bd;
+  font-size: 13px;
+  margin: 8px 0 15px;
+}
+
+#guestbookStatus {
+  min-height: 24px;
+  color: #ffe5a0;
+  overflow-wrap: anywhere;
+}
+
+.guestbook-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.guestbook-entry {
+  background: #fff0d0;
+  color: #583346;
+  padding: 18px;
+  border-radius: 15px;
+  text-align: left;
+  box-shadow: 0 5px 15px #10020855;
+  overflow-wrap: anywhere;
+}
+
+.guestbook-entry h3 {
+  color: #8d3455;
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.guestbook-class {
+  color: #98677a;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.guestbook-entry p {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.guestbook-date {
+  font-size: 12px;
+  color: #936a78;
+  border-top: 1px dashed #c9a4ad;
+  padding-top: 10px;
+  margin-top: 12px;
+}
+
+.guestbook-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.guestbook-photos img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.guestbook-empty {
+  color: #ffe5bd;
+  line-height: 1.7;
+  padding: 20px;
+  grid-column: 1 / -1;
+}
+
 /* TRÁI TIM BAY */
 
 .float {
@@ -415,6 +540,18 @@ button:disabled {
   .random-card .random-message {
     font-size: 14px;
   }
+
+  .guestbook-section {
+    padding: 16px;
+  }
+
+  .guestbook-list {
+    grid-template-columns: 1fr;
+  }
+
+  .guestbook-photos img {
+    height: 125px;
+  }
 }
 </style>
 </head>
@@ -460,8 +597,6 @@ button:disabled {
   <div class="message-count" id="messageCount">
     Chờ những lời chúc đầu tiên ♥
   </div>
-
-  <!-- NÚT KHÁM PHÁ LỜI CHÚC -->
 
   <div class="random-section">
     <button id="randomButton" class="random-button" type="button">
@@ -525,6 +660,66 @@ button:disabled {
 </section>
 
 </main>
+
+<!-- SỔ LƯU BÚT KỶ NIỆM -->
+
+<section class="guestbook-section">
+
+  <h2>📖 Sổ lưu bút kỷ niệm</h2>
+
+  <p class="guestbook-intro">
+    Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ
+    bên thầy cô, bạn bè nhé! ♥
+  </p>
+
+  <form id="guestbookForm" class="guestbook-form">
+
+    <input
+      id="guestName"
+      maxlength="40"
+      placeholder="Tên của bạn"
+      required
+    >
+
+    <input
+      id="guestClass"
+      maxlength="30"
+      placeholder="Lớp của bạn"
+    >
+
+    <textarea
+      id="guestMemory"
+      maxlength="2000"
+      placeholder="Viết kỷ niệm của bạn..."
+      required
+    ></textarea>
+
+    <label for="guestPhotos">📷 Chọn ảnh kỷ niệm</label>
+
+    <input
+      id="guestPhotos"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      multiple
+    >
+
+    <p class="photo-hint">
+      Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB.
+    </p>
+
+    <button type="submit">LƯU KỶ NIỆM ♥</button>
+
+  </form>
+
+  <p id="guestbookStatus"></p>
+
+  <h2>♥ Những kỷ niệm được chia sẻ ♥</h2>
+
+  <div id="guestbookList" class="guestbook-list">
+    <div class="guestbook-empty">Đang tải những kỷ niệm...</div>
+  </div>
+
+</section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -629,8 +824,6 @@ async function loadMessages() {
     const data = await r.json();
     const messages = Array.isArray(data) ? data : [];
 
-    // Cập nhật danh sách để tính năng ngẫu nhiên sử dụng
-
     allMessages = messages;
 
     const box = $("messages");
@@ -655,8 +848,6 @@ async function loadMessages() {
     $("randomButton").disabled = false;
     $("emptyHeart").style.display = "none";
 
-    // Tự điều chỉnh số cột theo thiết bị
-
     const cols = window.matchMedia("(max-width: 700px)").matches
       ? 3
       : 5;
@@ -670,8 +861,6 @@ async function loadMessages() {
       `repeat(${layout.rows}, minmax(105px, auto))`;
 
     box.replaceChildren();
-
-    // Đặt từng lời chúc vào vị trí trái tim
 
     messages.forEach((m, index) => {
 
@@ -722,8 +911,6 @@ function showRandomWish() {
 
   let index = Math.floor(Math.random() * allMessages.length);
 
-  // Hạn chế chọn trùng lời chúc vừa đọc nếu có nhiều hơn một lời chúc
-
   if (allMessages.length > 1) {
     while (index === lastRandomIndex) {
       index = Math.floor(Math.random() * allMessages.length);
@@ -738,8 +925,6 @@ function showRandomWish() {
   $("randomName").textContent =
     "♥ Gửi bởi: " + (wish.name || "Ẩn danh");
 
-  // Khởi động lại hiệu ứng mở thiệp
-
   $("randomCard").classList.remove("show");
 
   void $("randomCard").offsetWidth;
@@ -750,8 +935,6 @@ function showRandomWish() {
 // NHẤN NÚT KHÁM PHÁ
 
 $("randomButton").onclick = async () => {
-  // Tải lại dữ liệu mới nhất trước khi chọn
-
   await loadMessages();
 
   if (allMessages.length === 0) {
@@ -795,65 +978,4 @@ $("form").onsubmit = async e => {
       })
     });
 
-    const result = await r.json();
-
-    if (!r.ok) {
-      throw new Error(
-        result.error || "Gửi lời chúc thất bại!"
-      );
-    }
-
-    $("message").value = "";
-
-    $("status").textContent =
-      "♥ Gửi lời chúc thành công! Cảm ơn bạn nhé!";
-
-    lastRenderedData = "";
-
-    await loadMessages();
-
-  } catch(err) {
-    $("status").textContent = err.message;
-
-  } finally {
-    btn.disabled = false;
-  }
-};
-
-// HIỆU ỨNG TRÁI TIM BAY
-
-function floating() {
-  const el = document.createElement("span");
-
-  el.className = "float";
-  el.textContent = Math.random() > 0.4 ? "♥" : "✦";
-  el.style.left = Math.random() * 100 + "vw";
-  el.style.color = "#f5d47d";
-  el.style.fontSize = "22px";
-
-  document.body.appendChild(el);
-
-  setTimeout(() => el.remove(), 8500);
-}
-
-// TỰ CẬP NHẬT KHI ĐỔI KÍCH THƯỚC MÀN HÌNH
-
-window.addEventListener("resize", () => {
-  lastRenderedData = "";
-  loadMessages();
-});
-
-// KHỞI ĐỘNG
-
-$("randomButton").disabled = true;
-
-setInterval(floating, 600);
-
-loadMessages();
-
-setInterval(loadMessages, 5000);
-
-</script>
-
-</body>
-</html>
+    const result = await r
