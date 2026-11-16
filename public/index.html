@@ -17,8 +17,7 @@ body {
   margin: 0;
   padding: 20px;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, #70263d, #3b101e 55%, #18060d);
+  background: radial-gradient(circle at top, #70263d, #3b101e 55%, #18060d);
   color: #ffe8b0;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -203,6 +202,87 @@ h2 {
   font-size: 14px;
 }
 
+/* KHÁM PHÁ LỜI CHÚC */
+
+.random-section {
+  margin-top: 25px;
+}
+
+.random-button {
+  background: linear-gradient(90deg, #ff9ab5, #ffe0a6);
+  color: #542035;
+  margin: 8px;
+}
+
+.random-card {
+  display: none;
+  margin: 18px auto 5px;
+  padding: 22px 18px;
+  max-width: 480px;
+  border: 2px solid #ffcb82;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fff0c9, #ffdce7);
+  color: #623148;
+  box-shadow: 0 8px 25px #10020866;
+  animation: cardAppear 0.45s ease both;
+}
+
+.random-card.show {
+  display: block;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.random-card .gift-icon {
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+
+.random-card .random-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #9b4263;
+  margin-bottom: 12px;
+}
+
+.random-card .random-message {
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+
+.random-card .random-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #a05270;
+  border-top: 1px dashed #c88da2;
+  padding-top: 12px;
+  margin-top: 15px;
+}
+
+.random-card .random-empty {
+  font-size: 14px;
+  color: #81465d;
+  line-height: 1.6;
+}
+
+.another-button {
+  margin-top: 12px;
+  background: linear-gradient(90deg, #d9a63e, #ffe7a0);
+  color: #451020;
+}
+
 /* FORM GỬI LỜI CHÚC */
 
 input, textarea {
@@ -327,6 +407,14 @@ button:disabled {
   .note-message {
     font-size: 10px;
   }
+
+  .random-card {
+    padding: 18px 13px;
+  }
+
+  .random-card .random-message {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -371,6 +459,25 @@ button:disabled {
 
   <div class="message-count" id="messageCount">
     Chờ những lời chúc đầu tiên ♥
+  </div>
+
+  <!-- NÚT KHÁM PHÁ LỜI CHÚC -->
+
+  <div class="random-section">
+    <button id="randomButton" class="random-button" type="button">
+      🎁 Khám phá lời chúc ngẫu nhiên
+    </button>
+
+    <div id="randomCard" class="random-card">
+      <div class="gift-icon">💌</div>
+      <div class="random-title">Một lời chúc dành cho bạn</div>
+      <div id="randomMessage" class="random-message"></div>
+      <div id="randomName" class="random-name"></div>
+
+      <button id="anotherButton" class="another-button" type="button">
+        ✨ Đọc lời chúc khác
+      </button>
+    </div>
   </div>
 
 </section>
@@ -421,6 +528,11 @@ button:disabled {
 
 <script>
 const $ = id => document.getElementById(id);
+
+// LƯU DANH SÁCH LỜI CHÚC ĐÃ TẢI
+
+let allMessages = [];
+let lastRandomIndex = -1;
 
 // TẠO QR CODE
 
@@ -517,8 +629,11 @@ async function loadMessages() {
     const data = await r.json();
     const messages = Array.isArray(data) ? data : [];
 
-    const box = $("messages");
+    // Cập nhật danh sách để tính năng ngẫu nhiên sử dụng
 
+    allMessages = messages;
+
+    const box = $("messages");
     const currentData = JSON.stringify(messages);
 
     if (currentData === lastRenderedData) return;
@@ -530,9 +645,14 @@ async function loadMessages() {
       $("emptyHeart").style.display = "block";
       $("messageCount").textContent =
         "Chờ những lời chúc đầu tiên ♥";
+
+      $("randomCard").classList.remove("show");
+      $("randomButton").disabled = true;
+
       return;
     }
 
+    $("randomButton").disabled = false;
     $("emptyHeart").style.display = "none";
 
     // Tự điều chỉnh số cột theo thiết bị
@@ -586,6 +706,70 @@ async function loadMessages() {
     console.error("Không tải được lời chúc:", e);
   }
 }
+
+// CHỌN VÀ HIỂN THỊ LỜI CHÚC NGẪU NHIÊN
+
+function showRandomWish() {
+  if (allMessages.length === 0) {
+    $("randomMessage").textContent =
+      "Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! ♥";
+
+    $("randomName").textContent = "";
+    $("randomCard").classList.add("show");
+
+    return;
+  }
+
+  let index = Math.floor(Math.random() * allMessages.length);
+
+  // Hạn chế chọn trùng lời chúc vừa đọc nếu có nhiều hơn một lời chúc
+
+  if (allMessages.length > 1) {
+    while (index === lastRandomIndex) {
+      index = Math.floor(Math.random() * allMessages.length);
+    }
+  }
+
+  lastRandomIndex = index;
+
+  const wish = allMessages[index];
+
+  $("randomMessage").textContent = wish.message || "";
+  $("randomName").textContent =
+    "♥ Gửi bởi: " + (wish.name || "Ẩn danh");
+
+  // Khởi động lại hiệu ứng mở thiệp
+
+  $("randomCard").classList.remove("show");
+
+  void $("randomCard").offsetWidth;
+
+  $("randomCard").classList.add("show");
+}
+
+// NHẤN NÚT KHÁM PHÁ
+
+$("randomButton").onclick = async () => {
+  // Tải lại dữ liệu mới nhất trước khi chọn
+
+  await loadMessages();
+
+  if (allMessages.length === 0) {
+    $("randomMessage").textContent =
+      "Chưa có lời chúc nào. Hãy gửi lời chúc đầu tiên nhé! ♥";
+
+    $("randomName").textContent = "";
+    $("randomCard").classList.add("show");
+
+    return;
+  }
+
+  showRandomWish();
+};
+
+// NHẤN ĐỌC LỜI CHÚC KHÁC
+
+$("anotherButton").onclick = showRandomWish;
 
 // GỬI LỜI CHÚC
 
@@ -660,6 +844,8 @@ window.addEventListener("resize", () => {
 });
 
 // KHỞI ĐỘNG
+
+$("randomButton").disabled = true;
 
 setInterval(floating, 600);
 
