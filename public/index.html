@@ -5,13 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tri ân thầy cô 20/11</title>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -21,6 +18,7 @@ body {
   color: #ffe8b0;
   font-family: Arial, sans-serif;
   text-align: center;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -30,11 +28,7 @@ h1 {
   margin: 15px 0;
 }
 
-.subtitle {
-  color: #ffe5bd;
-  font-size: 16px;
-  margin-bottom: 30px;
-}
+.subtitle { color: #ffe5bd; font-size: 16px; margin-bottom: 30px; }
 
 main {
   max-width: 1100px;
@@ -45,7 +39,7 @@ main {
   align-items: start;
 }
 
-.panel {
+.panel, .guestbook-section {
   padding: 25px;
   border: 1px solid #d9ad5b;
   border-radius: 22px;
@@ -53,13 +47,9 @@ main {
   box-shadow: 0 10px 35px #10020855;
 }
 
-h2 {
-  color: #ffe4a0;
-  font-size: 23px;
-}
+h2 { color: #ffe4a0; font-size: 23px; }
 
-/* TRÁI TIM */
-
+/* TRÁI TIM LỜI CHÚC */
 .heart-board {
   position: relative;
   width: 100%;
@@ -83,7 +73,7 @@ h2 {
 }
 
 .heart-outline path {
-  fill: rgba(255, 70, 120, 0.055);
+  fill: rgba(255,70,120,0.055);
   stroke: #ff9ab5;
   stroke-width: 3;
   stroke-linejoin: round;
@@ -92,17 +82,9 @@ h2 {
 }
 
 @keyframes heartGlow {
-  from {
-    stroke: #ff9ab5;
-    filter: drop-shadow(0 0 5px #ff4775);
-  }
-  to {
-    stroke: #ffe3a0;
-    filter: drop-shadow(0 0 17px #ff4775);
-  }
+  from { stroke: #ff9ab5; filter: drop-shadow(0 0 5px #ff4775); }
+  to { stroke: #ffe3a0; filter: drop-shadow(0 0 17px #ff4775); }
 }
-
-/* LỜI CHÚC XẾP THÀNH TRÁI TIM */
 
 #messages {
   position: relative;
@@ -132,17 +114,9 @@ h2 {
   animation: appear 0.5s ease both;
 }
 
-.note:nth-child(3n+2) {
-  background: #ffdce7;
-}
-
-.note:nth-child(3n) {
-  background: #e5f0d9;
-}
-
-.note:nth-child(4n) {
-  background: #e4e4ff;
-}
+.note:nth-child(3n+2) { background: #ffdce7; }
+.note:nth-child(3n) { background: #e5f0d9; }
+.note:nth-child(4n) { background: #e4e4ff; }
 
 .note-name {
   display: block;
@@ -153,21 +127,11 @@ h2 {
   border-bottom: 1px dashed #a77b8a;
 }
 
-.note-message {
-  font-size: 11px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
+.note-message { font-size: 11px; line-height: 1.5; white-space: pre-wrap; }
 
 @keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(15px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(15px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .heart-empty {
@@ -180,7 +144,7 @@ h2 {
   padding: 15px;
 }
 
-.heart-empty .big-heart {
+.big-heart {
   display: block;
   font-size: 55px;
   color: #ff8cae;
@@ -188,11 +152,7 @@ h2 {
   animation: beat 1.2s infinite;
 }
 
-@keyframes beat {
-  50% {
-    transform: scale(1.16);
-  }
-}
+@keyframes beat { 50% { transform: scale(1.16); } }
 
 .message-count {
   position: relative;
@@ -202,11 +162,8 @@ h2 {
   font-size: 14px;
 }
 
-/* KHÁM PHÁ LỜI CHÚC */
-
-.random-section {
-  margin-top: 25px;
-}
+/* LỜI CHÚC NGẪU NHIÊN */
+.random-section { margin-top: 25px; }
 
 .random-button {
   background: linear-gradient(90deg, #ff9ab5, #ffe0a6);
@@ -227,64 +184,20 @@ h2 {
   animation: cardAppear 0.45s ease both;
 }
 
-.random-card.show {
-  display: block;
-}
+.random-card.show { display: block; }
 
 @keyframes cardAppear {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.random-card .gift-icon {
-  font-size: 35px;
-  margin-bottom: 8px;
-}
+.gift-icon { font-size: 35px; margin-bottom: 8px; }
+.random-title { font-size: 17px; font-weight: bold; color: #9b4263; margin-bottom: 12px; }
+.random-message { font-size: 16px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; margin: 12px 0; }
+.random-name { font-size: 13px; font-weight: bold; color: #a05270; border-top: 1px dashed #c88da2; padding-top: 12px; margin-top: 15px; }
+.another-button { margin-top: 12px; background: linear-gradient(90deg, #d9a63e, #ffe7a0); color: #451020; }
 
-.random-card .random-title {
-  font-size: 17px;
-  font-weight: bold;
-  color: #9b4263;
-  margin-bottom: 12px;
-}
-
-.random-card .random-message {
-  font-size: 16px;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  margin: 12px 0;
-}
-
-.random-card .random-name {
-  font-size: 13px;
-  font-weight: bold;
-  color: #a05270;
-  border-top: 1px dashed #c88da2;
-  padding-top: 12px;
-  margin-top: 15px;
-}
-
-.random-card .random-empty {
-  font-size: 14px;
-  color: #81465d;
-  line-height: 1.6;
-}
-
-.another-button {
-  margin-top: 12px;
-  background: linear-gradient(90deg, #d9a63e, #ffe7a0);
-  color: #451020;
-}
-
-/* FORM GỬI LỜI CHÚC */
-
+/* FORM */
 input, textarea {
   width: 100%;
   padding: 14px;
@@ -298,14 +211,8 @@ input, textarea {
   color: #48202d;
 }
 
-textarea {
-  height: 125px;
-  resize: vertical;
-}
-
-input:focus, textarea:focus {
-  box-shadow: 0 0 0 3px #f5cf7a55;
-}
+textarea { height: 125px; resize: vertical; }
+input:focus, textarea:focus { box-shadow: 0 0 0 3px #f5cf7a55; }
 
 button {
   padding: 13px 25px;
@@ -319,17 +226,10 @@ button {
   transition: 0.2s;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px #e6b84e55;
-}
+button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px #e6b84e55; }
+button:disabled { opacity: 0.6; cursor: wait; }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-#status {
+#status, #guestbookStatus {
   min-height: 24px;
   color: #ffe5a0;
   overflow-wrap: anywhere;
@@ -341,51 +241,23 @@ button:disabled {
   background: white;
   border-radius: 8px;
   margin: 8px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
-.qr-title {
-  margin-top: 25px;
-  color: #ffe5a0;
-}
-
-.copy-button {
-  margin-top: 8px;
-}
+.qr-title { margin-top: 25px; color: #ffe5a0; }
+.copy-button { margin-top: 8px; }
 
 /* SỔ LƯU BÚT */
-
 .guestbook-section {
   max-width: 1100px;
   margin: 30px auto;
-  padding: 25px;
-  border: 1px solid #d9ad5b;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.07);
-  box-shadow: 0 10px 35px #10020855;
 }
 
-.guestbook-section h2 {
-  color: #ffe4a0;
-}
-
-.guestbook-intro {
-  color: #ffe5bd;
-  line-height: 1.7;
-}
-
-.guestbook-form {
-  max-width: 650px;
-  margin: 20px auto;
-}
-
-.guestbook-form input,
-.guestbook-form textarea {
-  display: block;
-}
-
-.guestbook-form textarea {
-  min-height: 130px;
-}
+.guestbook-intro { color: #ffe5bd; line-height: 1.7; }
+.guestbook-form { max-width: 650px; margin: 20px auto; }
+.guestbook-form input, .guestbook-form textarea { display: block; }
+.guestbook-form textarea { min-height: 130px; }
 
 .guestbook-form label {
   display: block;
@@ -395,22 +267,8 @@ button:disabled {
   font-weight: bold;
 }
 
-.guestbook-form input[type="file"] {
-  background: #fffaf1;
-  color: #48202d;
-}
-
-.photo-hint {
-  color: #ffe5bd;
-  font-size: 13px;
-  margin: 8px 0 15px;
-}
-
-#guestbookStatus {
-  min-height: 24px;
-  color: #ffe5a0;
-  overflow-wrap: anywhere;
-}
+.guestbook-form input[type="file"] { background: #fffaf1; color: #48202d; }
+.photo-hint { color: #ffe5bd; font-size: 13px; margin: 8px 0 15px; }
 
 .guestbook-list {
   display: grid;
@@ -429,31 +287,10 @@ button:disabled {
   overflow-wrap: anywhere;
 }
 
-.guestbook-entry h3 {
-  color: #8d3455;
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.guestbook-class {
-  color: #98677a;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.guestbook-entry p {
-  white-space: pre-wrap;
-  line-height: 1.6;
-  margin: 10px 0;
-}
-
-.guestbook-date {
-  font-size: 12px;
-  color: #936a78;
-  border-top: 1px dashed #c9a4ad;
-  padding-top: 10px;
-  margin-top: 12px;
-}
+.guestbook-entry h3 { color: #8d3455; margin: 0 0 8px; font-size: 18px; }
+.guestbook-class { color: #98677a; font-size: 13px; margin-bottom: 10px; }
+.guestbook-entry p { white-space: pre-wrap; line-height: 1.6; margin: 10px 0; }
+.guestbook-date { font-size: 12px; color: #936a78; border-top: 1px dashed #c9a4ad; padding-top: 10px; margin-top: 12px; }
 
 .guestbook-photos {
   display: grid;
@@ -470,88 +307,39 @@ button:disabled {
   cursor: pointer;
 }
 
-.guestbook-empty {
-  color: #ffe5bd;
-  line-height: 1.7;
-  padding: 20px;
-  grid-column: 1 / -1;
-}
+.guestbook-empty { color: #ffe5bd; line-height: 1.7; padding: 20px; grid-column: 1 / -1; }
 
-/* TRÁI TIM BAY */
-
+/* TIM BAY BAY */
 .float {
   position: fixed;
-  bottom: -30px;
-  animation: fly 8s linear forwards;
+  bottom: -35px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 10;
+  animation: fly 8s linear forwards;
+  user-select: none;
 }
 
 @keyframes fly {
-  to {
-    transform: translateY(-110vh) rotate(50deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-110vh) rotate(50deg); opacity: 0; }
 }
 
 /* ĐIỆN THOẠI */
-
 @media (max-width: 700px) {
-  body {
-    padding: 12px;
-  }
-
-  main {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .panel {
-    padding: 16px;
-  }
-
-  .heart-board {
-    min-height: 360px;
-    padding: 45px 2% 35px;
-  }
-
-  #messages {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-  }
-
-  .note {
-    min-height: 95px;
-    padding: 8px 6px;
-  }
-
-  .note-name {
-    font-size: 10px;
-  }
-
-  .note-message {
-    font-size: 10px;
-  }
-
-  .random-card {
-    padding: 18px 13px;
-  }
-
-  .random-card .random-message {
-    font-size: 14px;
-  }
-
-  .guestbook-section {
-    padding: 16px;
-  }
-
-  .guestbook-list {
-    grid-template-columns: 1fr;
-  }
-
-  .guestbook-photos img {
-    height: 125px;
-  }
+  body { padding: 12px; }
+  main { grid-template-columns: 1fr; gap: 18px; }
+  .panel { padding: 16px; }
+  .heart-board { min-height: 360px; padding: 45px 2% 35px; }
+  #messages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .note { min-height: 95px; padding: 8px 6px; }
+  .note-name, .note-message { font-size: 10px; }
+  .random-card { padding: 18px 13px; }
+  .random-message { font-size: 14px; }
+  .guestbook-section { padding: 16px; }
+  .guestbook-list { grid-template-columns: 1fr; }
+  .guestbook-photos img { height: 125px; }
 }
 </style>
 </head>
@@ -559,199 +347,122 @@ button:disabled {
 <body>
 
 <h1>♥ Tri ân thầy cô 20/11 ♥</h1>
-
-<p class="subtitle">
-  Mỗi lời chúc nhỏ ghép thành một trái tim lớn!
-</p>
+<p class="subtitle">Mỗi lời chúc nhỏ ghép thành một trái tim lớn!</p>
 
 <main>
+  <section class="panel">
+    <h2>♥ Trái tim tri ân ♥</h2>
 
-<!-- KHU VỰC TRÁI TIM -->
+    <div class="heart-board">
+      <svg class="heart-outline" viewBox="0 0 500 460" preserveAspectRatio="xMidYMid meet">
+        <path d="M250 435 C220 405 25 265 25 145 C25 35 155 5 250 105 C345 5 475 35 475 145 C475 265 280 405 250 435 Z"/>
+      </svg>
 
-<section class="panel">
+      <div class="heart-empty" id="emptyHeart">
+        <span class="big-heart">♥</span>
+        Hãy gửi những lời chúc yêu thương để cùng tạo nên trái tim tri ân thầy cô nhé!
+      </div>
 
-  <h2>♥ Trái tim tri ân ♥</h2>
-
-  <div class="heart-board">
-
-    <svg class="heart-outline"
-         viewBox="0 0 500 460"
-         preserveAspectRatio="xMidYMid meet">
-      <path d="M250 435
-      C220 405 25 265 25 145
-      C25 35 155 5 250 105
-      C345 5 475 35 475 145
-      C475 265 280 405 250 435 Z"/>
-    </svg>
-
-    <div class="heart-empty" id="emptyHeart">
-      <span class="big-heart">♥</span>
-      Hãy gửi những lời chúc yêu thương
-      để cùng tạo nên trái tim tri ân thầy cô nhé!
+      <div id="messages"></div>
     </div>
 
-    <div id="messages"></div>
+    <div class="message-count" id="messageCount">Đang tải lời chúc ♥</div>
 
-  </div>
+    <div class="random-section">
+      <button id="randomButton" class="random-button" type="button">🎁 Khám phá lời chúc ngẫu nhiên</button>
 
-  <div class="message-count" id="messageCount">
-    Chờ những lời chúc đầu tiên ♥
-  </div>
-
-  <div class="random-section">
-    <button id="randomButton" class="random-button" type="button">
-      🎁 Khám phá lời chúc ngẫu nhiên
-    </button>
-
-    <div id="randomCard" class="random-card">
-      <div class="gift-icon">💌</div>
-      <div class="random-title">Một lời chúc dành cho bạn</div>
-      <div id="randomMessage" class="random-message"></div>
-      <div id="randomName" class="random-name"></div>
-
-      <button id="anotherButton" class="another-button" type="button">
-        ✨ Đọc lời chúc khác
-      </button>
+      <div id="randomCard" class="random-card">
+        <div class="gift-icon">💌</div>
+        <div class="random-title">Một lời chúc dành cho bạn</div>
+        <div id="randomMessage" class="random-message"></div>
+        <div id="randomName" class="random-name"></div>
+        <button id="anotherButton" class="another-button" type="button">✨ Đọc lời chúc khác</button>
+      </div>
     </div>
-  </div>
+  </section>
 
-</section>
+  <section class="panel">
+    <h2>Gửi lời chúc đến thầy cô</h2>
 
-<!-- KHU VỰC GỬI LỜI CHÚC -->
+    <form id="form">
+      <input id="name" maxlength="32" placeholder="Tên của bạn / Tập thể lớp" required>
+      <textarea id="message" maxlength="180" placeholder="Viết lời chúc của bạn..." required></textarea>
+      <button type="submit">GỬI LỜI CHÚC ♥</button>
+    </form>
 
-<section class="panel">
+    <p id="status"></p>
 
-  <h2>Gửi lời chúc đến thầy cô</h2>
+    <h3 class="qr-title">Quét QR để gửi lời chúc</h3>
+    <div id="qrcode"></div>
 
-  <form id="form">
-
-    <input
-      id="name"
-      maxlength="32"
-      placeholder="Tên của bạn / Tập thể lớp"
-      required
-    >
-
-    <textarea
-      id="message"
-      maxlength="180"
-      placeholder="Viết lời chúc của bạn..."
-      required
-    ></textarea>
-
-    <button type="submit">
-      GỬI LỜI CHÚC ♥
-    </button>
-
-  </form>
-
-  <p id="status"></p>
-
-  <h3 class="qr-title">Quét QR để gửi lời chúc</h3>
-
-  <div id="qrcode"></div>
-
-  <p>
-    <button id="copy" class="copy-button" type="button">
-      Sao chép đường link
-    </button>
-  </p>
-
-</section>
-
+    <p>
+      <button id="copy" class="copy-button" type="button">Sao chép đường link</button>
+    </p>
+  </section>
 </main>
 
-<!-- SỔ LƯU BÚT KỶ NIỆM -->
-
 <section class="guestbook-section">
-
   <h2>📖 Sổ lưu bút kỷ niệm</h2>
-
-  <p class="guestbook-intro">
-    Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ
-    bên thầy cô, bạn bè nhé! ♥
-  </p>
+  <p class="guestbook-intro">Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ bên thầy cô, bạn bè nhé! ♥</p>
 
   <form id="guestbookForm" class="guestbook-form">
-
-    <input
-      id="guestName"
-      maxlength="40"
-      placeholder="Tên của bạn"
-      required
-    >
-
-    <input
-      id="guestClass"
-      maxlength="30"
-      placeholder="Lớp của bạn"
-    >
-
-    <textarea
-      id="guestMemory"
-      maxlength="2000"
-      placeholder="Viết kỷ niệm của bạn..."
-      required
-    ></textarea>
+    <input id="guestName" maxlength="40" placeholder="Tên của bạn" required>
+    <input id="guestClass" maxlength="30" placeholder="Lớp của bạn">
+    <textarea id="guestMemory" maxlength="2000" placeholder="Viết kỷ niệm của bạn..." required></textarea>
 
     <label for="guestPhotos">📷 Chọn ảnh kỷ niệm</label>
-
-    <input
-      id="guestPhotos"
-      type="file"
-      accept="image/jpeg,image/png,image/webp"
-      multiple
-    >
-
-    <p class="photo-hint">
-      Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB.
-    </p>
+    <input id="guestPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+    <p class="photo-hint">Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB.</p>
 
     <button type="submit">LƯU KỶ NIỆM ♥</button>
-
   </form>
 
   <p id="guestbookStatus"></p>
-
   <h2>♥ Những kỷ niệm được chia sẻ ♥</h2>
 
   <div id="guestbookList" class="guestbook-list">
     <div class="guestbook-empty">Đang tải những kỷ niệm...</div>
   </div>
-
 </section>
 
 <script>
 const $ = id => document.getElementById(id);
 
-// LƯU DANH SÁCH LỜI CHÚC ĐÃ TẢI
-
 let allMessages = [];
 let lastRandomIndex = -1;
+let lastRenderedData = "";
 
-// TẠO QR CODE
+/* TẠO MÃ QR */
+function createQR() {
+  const qrBox = $("qrcode");
+  qrBox.replaceChildren();
 
-if (typeof QRCode !== "undefined") {
-  new QRCode($("qrcode"), {
-    text: location.href,
-    width: 150,
-    height: 150
-  });
+  if (typeof QRCode !== "undefined") {
+    new QRCode(qrBox, {
+      text: location.href,
+      width: 150,
+      height: 150,
+      colorDark: "#3b101e",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  } else {
+    qrBox.textContent = "Không tải được thư viện QR. Hãy tải lại trang.";
+  }
 }
+createQR();
 
-// SAO CHÉP ĐƯỜNG LINK
-
+/* SAO CHÉP LINK */
 $("copy").onclick = async () => {
   try {
     await navigator.clipboard.writeText(location.href);
     $("status").textContent = "♥ Đã sao chép đường link!";
-  } catch(e) {
-    $("status").textContent = location.href;
+  } catch (e) {
+    $("status").textContent = "Đường link: " + location.href;
   }
 };
 
-// TÍNH VỊ TRÍ CÁC NOTE THEO HÌNH TRÁI TIM
-
+/* XẾP LỜI CHÚC THÀNH HÌNH TRÁI TIM */
 function getHeartSlots(count, cols) {
   let rows = 5;
   let slots = [];
@@ -761,118 +472,77 @@ function getHeartSlots(count, cols) {
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-
         const x = ((c + 0.5) / cols) * 2.6 - 1.3;
         const y = 1.15 - ((r + 0.5) / rows) * 2.3;
 
-        const value =
-          Math.pow(x * x + y * y - 1, 3)
-          - x * x * Math.pow(y, 3);
+        const value = Math.pow(x * x + y * y - 1, 3) - x * x * Math.pow(y, 3);
 
-        if (value <= 0) {
-          slots.push({
-            row: r,
-            col: c
-          });
-        }
+        if (value <= 0) slots.push({ row: r, col: c });
       }
     }
 
     if (slots.length >= count) break;
-
     rows++;
   }
 
   if (count === 1) {
-    return {
-      rows,
-      slots: [{
-        row: Math.floor(rows / 2),
-        col: Math.floor(cols / 2)
-      }]
-    };
+    return { rows, slots: [{ row: Math.floor(rows / 2), col: Math.floor(cols / 2) }] };
   }
 
   const selected = [];
-
   for (let i = 0; i < count; i++) {
-    const index = Math.round(
-      i * (slots.length - 1) / (count - 1)
-    );
-
+    const index = Math.round(i * (slots.length - 1) / (count - 1));
     selected.push(slots[index]);
   }
 
-  return {
-    rows,
-    slots: selected
-  };
+  return { rows, slots: selected };
 }
 
-// HIỂN THỊ LỜI CHÚC
-
-let lastRenderedData = "";
-
+/* TẢI VÀ HIỂN THỊ LỜI CHÚC CŨ + MỚI */
 async function loadMessages() {
   try {
-    const r = await fetch("/api/messages");
+    const response = await fetch("/api/messages", { cache: "no-store" });
+    if (!response.ok) throw new Error("Máy chủ không tải được lời chúc.");
 
-    if (!r.ok) {
-      throw new Error("Không tải được lời chúc.");
-    }
-
-    const data = await r.json();
+    const data = await response.json();
     const messages = Array.isArray(data) ? data : [];
 
     allMessages = messages;
 
-    const box = $("messages");
     const currentData = JSON.stringify(messages);
-
     if (currentData === lastRenderedData) return;
-
     lastRenderedData = currentData;
+
+    const box = $("messages");
 
     if (messages.length === 0) {
       box.replaceChildren();
       $("emptyHeart").style.display = "block";
-      $("messageCount").textContent =
-        "Chờ những lời chúc đầu tiên ♥";
-
-      $("randomCard").classList.remove("show");
+      $("messageCount").textContent = "Chờ những lời chúc đầu tiên ♥";
       $("randomButton").disabled = true;
-
+      $("randomCard").classList.remove("show");
       return;
     }
 
     $("randomButton").disabled = false;
     $("emptyHeart").style.display = "none";
 
-    const cols = window.matchMedia("(max-width: 700px)").matches
-      ? 3
-      : 5;
-
+    const cols = window.matchMedia("(max-width: 700px)").matches ? 3 : 5;
     const layout = getHeartSlots(messages.length, cols);
 
-    box.style.gridTemplateColumns =
-      `repeat(${cols}, minmax(0, 1fr))`;
-
-    box.style.gridTemplateRows =
-      `repeat(${layout.rows}, minmax(105px, auto))`;
-
+    box.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+    box.style.gridTemplateRows = `repeat(${layout.rows}, minmax(105px, auto))`;
     box.replaceChildren();
 
     messages.forEach((m, index) => {
-
       const slot = layout.slots[index];
+      if (!slot) return;
 
       const note = document.createElement("div");
       note.className = "note";
-
       note.style.gridColumn = String(slot.col + 1);
       note.style.gridRow = String(slot.row + 1);
-      note.style.animationDelay =
-        `${Math.min(index * 0.04, 1)}s`;
+      note.style.animationDelay = `${Math.min(index * 0.04, 1)}s`;
 
       const name = document.createElement("span");
       name.className = "note-name";
@@ -882,30 +552,23 @@ async function loadMessages() {
       message.className = "note-message";
       message.textContent = m.message || "";
 
-      note.appendChild(name);
-      note.appendChild(message);
-
+      note.append(name, message);
       box.appendChild(note);
     });
 
-    $("messageCount").textContent =
-      `♥ ${messages.length} lời chúc đã cùng tạo nên trái tim!`;
-
-  } catch(e) {
-    console.error("Không tải được lời chúc:", e);
+    $("messageCount").textContent = `♥ ${messages.length} lời chúc đã cùng tạo nên trái tim!`;
+  } catch (error) {
+    console.error("Lỗi tải lời chúc:", error);
+    $("messageCount").textContent = "Chưa tải được lời chúc. Vui lòng thử tải lại trang.";
   }
 }
 
-// CHỌN VÀ HIỂN THỊ LỜI CHÚC NGẪU NHIÊN
-
+/* LỜI CHÚC NGẪU NHIÊN */
 function showRandomWish() {
   if (allMessages.length === 0) {
-    $("randomMessage").textContent =
-      "Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! ♥";
-
+    $("randomMessage").textContent = "Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! ♥";
     $("randomName").textContent = "";
     $("randomCard").classList.add("show");
-
     return;
   }
 
@@ -918,64 +581,223 @@ function showRandomWish() {
   }
 
   lastRandomIndex = index;
-
   const wish = allMessages[index];
 
   $("randomMessage").textContent = wish.message || "";
-  $("randomName").textContent =
-    "♥ Gửi bởi: " + (wish.name || "Ẩn danh");
+  $("randomName").textContent = "♥ Gửi bởi: " + (wish.name || "Ẩn danh");
 
   $("randomCard").classList.remove("show");
-
   void $("randomCard").offsetWidth;
-
   $("randomCard").classList.add("show");
 }
 
-// NHẤN NÚT KHÁM PHÁ
-
 $("randomButton").onclick = async () => {
   await loadMessages();
-
-  if (allMessages.length === 0) {
-    $("randomMessage").textContent =
-      "Chưa có lời chúc nào. Hãy gửi lời chúc đầu tiên nhé! ♥";
-
-    $("randomName").textContent = "";
-    $("randomCard").classList.add("show");
-
-    return;
-  }
-
   showRandomWish();
 };
 
-// NHẤN ĐỌC LỜI CHÚC KHÁC
-
 $("anotherButton").onclick = showRandomWish;
 
-// GỬI LỜI CHÚC
+/* GỬI LỜI CHÚC */
+$("form").onsubmit = async event => {
+  event.preventDefault();
 
-$("form").onsubmit = async e => {
-  e.preventDefault();
+  const button = $("form").querySelector('button[type="submit"]');
+  const name = $("name").value.trim();
+  const message = $("message").value.trim();
 
-  const btn = e.submitter ||
-    $("form").querySelector('button[type="submit"]');
+  if (!name || !message) return;
 
-  btn.disabled = true;
-
+  button.disabled = true;
   $("status").textContent = "Đang gửi lời chúc...";
 
   try {
-    const r = await fetch("/api/messages", {
+    const response = await fetch("/api/messages", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: $("name").value.trim(),
-        message: $("message").value.trim()
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, message })
     });
 
-    const result = await r
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Không gửi được lời chúc.");
+    }
+
+    $("status").textContent = "♥ Gửi lời chúc thành công!";
+    $("form").reset();
+    lastRenderedData = "";
+    await loadMessages();
+  } catch (error) {
+    console.error(error);
+    $("status").textContent = "Không gửi được: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+};
+
+/* HIỂN THỊ SỔ LƯU BÚT */
+function renderGuestbook(entries) {
+  const list = $("guestbookList");
+  list.replaceChildren();
+
+  if (!Array.isArray(entries) || entries.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "guestbook-empty";
+    empty.textContent = "Chưa có kỷ niệm nào. Hãy là người đầu tiên chia sẻ nhé! ♥";
+    list.appendChild(empty);
+    return;
+  }
+
+  entries.forEach(entry => {
+    const card = document.createElement("article");
+    card.className = "guestbook-entry";
+
+    const title = document.createElement("h3");
+    title.textContent = "♥ " + (entry.sender_name || "Ẩn danh");
+    card.appendChild(title);
+
+    if (entry.class_name) {
+      const className = document.createElement("div");
+      className.className = "guestbook-class";
+      className.textContent = "Lớp: " + entry.class_name;
+      card.appendChild(className);
+    }
+
+    const memory = document.createElement("p");
+    memory.textContent = entry.memory || "";
+    card.appendChild(memory);
+
+    if (Array.isArray(entry.photos) && entry.photos.length > 0) {
+      const photoBox = document.createElement("div");
+      photoBox.className = "guestbook-photos";
+
+      entry.photos.forEach(photo => {
+        const url = typeof photo === "string" ? photo : photo && (photo.url || photo.publicUrl);
+        if (!url) return;
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Ảnh kỷ niệm";
+        img.loading = "lazy";
+        img.onclick = () => window.open(url, "_blank", "noopener");
+        photoBox.appendChild(img);
+      });
+
+      if (photoBox.children.length) card.appendChild(photoBox);
+    }
+
+    if (entry.created_at) {
+      const date = document.createElement("div");
+      date.className = "guestbook-date";
+
+      const parsedDate = new Date(entry.created_at);
+      date.textContent = Number.isNaN(parsedDate.getTime())
+        ? ""
+        : parsedDate.toLocaleString("vi-VN");
+
+      card.appendChild(date);
+    }
+
+    list.appendChild(card);
+  });
+}
+
+async function loadGuestbook() {
+  try {
+    const response = await fetch("/api/guestbook", { cache: "no-store" });
+    if (!response.ok) throw new Error("Không tải được sổ lưu bút.");
+
+    const entries = await response.json();
+    renderGuestbook(entries);
+  } catch (error) {
+    console.error("Lỗi tải sổ lưu bút:", error);
+    $("guestbookList").textContent = "Chưa tải được sổ lưu bút. Vui lòng thử tải lại trang.";
+  }
+}
+
+/* GỬI KỶ NIỆM VÀ ẢNH */
+$("guestbookForm").onsubmit = async event => {
+  event.preventDefault();
+
+  const button = $("guestbookForm").querySelector('button[type="submit"]');
+  const files = Array.from($("guestPhotos").files);
+
+  if (files.length > 5) {
+    $("guestbookStatus").textContent = "Bạn chỉ được chọn tối đa 5 ảnh.";
+    return;
+  }
+
+  const maxSize = 5 * 1024 * 1024;
+  for (const file of files) {
+    if (file.size > maxSize) {
+      $("guestbookStatus").textContent = `Ảnh "${file.name}" vượt quá 5 MB.`;
+      return;
+    }
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      $("guestbookStatus").textContent = "Chỉ hỗ trợ ảnh JPG, PNG hoặc WEBP.";
+      return;
+    }
+  }
+
+  const formData = new FormData();
+  formData.append("name", $("guestName").value.trim());
+  formData.append("className", $("guestClass").value.trim());
+  formData.append("memory", $("guestMemory").value.trim());
+
+  files.forEach(file => formData.append("photos", file));
+
+  button.disabled = true;
+  $("guestbookStatus").textContent = "Đang lưu kỷ niệm và tải ảnh lên...";
+
+  try {
+    const response = await fetch("/api/guestbook", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Không lưu được kỷ niệm.");
+    }
+
+    $("guestbookStatus").textContent = "♥ Đã lưu kỷ niệm thành công!";
+    $("guestbookForm").reset();
+    await loadGuestbook();
+  } catch (error) {
+    console.error(error);
+    $("guestbookStatus").textContent = "Lỗi: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+};
+
+/* TRÁI TIM NHỎ BAY BAY */
+function createFloatingHeart() {
+  const heart = document.createElement("span");
+  heart.className = "float";
+  heart.textContent = ["♥", "♡", "💕", "💗", "❤"][Math.floor(Math.random() * 5)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (12 + Math.random() * 18) + "px";
+  heart.style.color = ["#ff9ab5", "#ffe3a0", "#ff6f91", "#ffdce7"][Math.floor(Math.random() * 4)];
+  heart.style.animationDuration = (6 + Math.random() * 5) + "s";
+
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 12000);
+}
+
+/* KHỞI ĐỘNG */
+loadMessages();
+loadGuestbook();
+
+setInterval(loadMessages, 5000);
+setInterval(loadGuestbook, 10000);
+setInterval(createFloatingHeart, 650);
+</script>
+
+</body>
+</html>
+```
