@@ -127,13 +127,23 @@ h2 {
 
 /* CÁC TẤM NOTE */
 
+
 #messages {
   position: relative;
   z-index: 2;
   width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 35px 9% 45px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+  clip-path: polygon(
+    50% 96%, 5% 55%, 0% 38%, 2% 22%,
+    12% 10%, 27% 7%, 40% 14%, 50% 27%,
+    60% 14%, 73% 7%, 88% 10%, 98% 22%,
+    100% 38%, 95% 55%
+  );
 }
 
 .note {
@@ -141,7 +151,7 @@ h2 {
   min-height: 105px;
   padding: 12px 10px;
   text-align: left;
-  border-radius: 5px 5px 13px 5px;
+  border-radius: 8px;
   color: #583346;
   background: #fff0b8;
   box-shadow: 2px 5px 12px #16040b55;
@@ -179,6 +189,7 @@ h2 {
   line-height: 1.5;
   white-space: pre-wrap;
 }
+
 
 @keyframes appear {
   from {
