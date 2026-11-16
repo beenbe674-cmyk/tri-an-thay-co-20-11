@@ -1,49 +1,113 @@
+
 const express = require("express");
-const fs = require("fs");
 const path = require("path");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = process.env.DATA_DIR || __dirname;
-const DATA_FILE = path.join(DATA_DIR, "messages.json");
+
 const ADMIN_PIN = process.env.ADMIN_PIN || "2011";
+
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.error("Thieu cau hinh Supabase.");
+  process.exit(1);
+}
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 app.use(express.json({ limit: "12kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
-function readMessages() {
-  try { return JSON.parse(fs.readFileSync(DATA_FILE, "utf8")); }
-  catch { return []; }
-}
-function saveMessages(items) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(items, null, 2), "utf8");
-}
+// Lay danh sach loi chuc
+app.get("/api/messages", async (_req, res) => {
+  const { data, error } = await supabase
+    .from("wishes")
+    .select("id, sender_name, message, created_at")
+    .order("created_at", { ascending: true });
 
-app.get("/api/messages", (_req, res) => {
-  const messages = readMessages().map(({id, name, message, createdAt}) => ({id, name, message, createdAt}));
-  res.json(messages);
+  if (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "Khong the tai loi chuc."
+    });
+  }
+
+  res.json(data.map(item => ({
+    id: item.id,
+    name: item.sender_name,
+    message: item.message,
+    createdAt: item.created_at
+  })));
 });
 
-app.post("/api/messages", (req, res) => {
-  let name = String(req.body.name || "").trim().slice(0, 32);
-  let message = String(req.body.message || "").trim().slice(0, 180);
-  if (!name || !message) return res.status(400).json({error: "Vui lòng nhập tên và lời chúc."});
-  if (message.length < 3) return res.status(400).json({error: "Lời chúc quá ngắn."});
-  const messages = readMessages();
-  if (messages.length >= 500) return res.status(429).json({error: "Bảng lời chúc đã đầy. Hãy liên hệ ban tổ chức."});
-  const item = {id: Date.now().toString(36) + Math.random().toString(36).slice(2,7), name, message, createdAt: new Date().toISOString()};
-  messages.push(item);
-  saveMessages(messages);
-  res.json({ok: true});
+// Gui loi chuc moi
+app.post("/api/messages", async (req, res) => {
+  const name = String(req.body.name || "Ẩn danh")
+    .trim()
+    .slice(0, 40);
+
+  const message = String(req.body.message || "")
+    .trim()
+    .slice(0, 500);
+
+  if (!name || !message) {
+    return res.status(400).json({
+      error: "Vui long nhap ten va loi chuc."
+    });
+  }
+
+  const { error } = await supabase
+    .from("wishes")
+    .insert({
+      sender_name: name,
+      message: message
+    });
+
+  if (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "Chua gui duoc loi chuc. Vui long thu lai."
+    });
+  }
+
+  res.json({ ok: true });
 });
 
-app.delete("/api/messages/:id", (req, res) => {
-  if (String(req.headers["x-admin-pin"] || "") !== ADMIN_PIN)
-    return res.status(401).json({error: "Mã quản trị không đúng."});
-  const messages = readMessages().filter(m => m.id !== req.params.id);
-  saveMessages(messages);
-  res.json({ok: true});
+// Xoa loi chuc
+app.delete("/api/messages/:id", async (req, res) => {
+  const adminPin = String(req.headers["x-admin-pin"] || "");
+
+  if (adminPin !== ADMIN_PIN) {
+    return res.status(401).json({
+      error: "Ma quan tri khong dung."
+    });
+  }
+
+  const id = req.params.id;
+
+  const { error } = await supabase
+    .from("wishes")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "Khong the xoa loi chuc."
+    });
+  }
+
+  res.json({ ok: true });
 });
 
-app.get("/api/health", (_req, res) => res.json({ok: true}));
-app.listen(PORT, () => console.log(`Website đang chạy tại cổng ${PORT}`));
+// Kiem tra server
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true });
+});
+
+app.listen(PORT, () => {
+  console.log(`Website dang chay tai cong ${PORT}`);
+});
