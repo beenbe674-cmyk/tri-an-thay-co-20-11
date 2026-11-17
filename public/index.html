@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -5,184 +6,676 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tri ân thầy cô 20/11</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
 *{box-sizing:border-box}
-:root{--gold:#ffe3a0;--pink:#ff9ab5;--wine:#3b101e}
-body{margin:0;padding:20px;min-height:100vh;background:radial-gradient(circle at top,#70263d,#3b101e 55%,#18060d);color:#ffe8b0;font-family:Arial,sans-serif;text-align:center;overflow-x:hidden}
-h1{color:var(--gold);font-size:clamp(27px,5vw,45px);text-shadow:0 0 18px #e9ad55;margin:15px 0}
-.subtitle{color:#ffe5bd;font-size:16px;margin-bottom:30px}
-main{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:start}
-.panel,.guestbook-section{padding:25px;border:1px solid #d9ad5b;border-radius:22px;background:rgba(255,255,255,.07);box-shadow:0 10px 35px #10020855}
-h2{color:#ffe4a0;font-size:23px}
-.heart-board{position:relative;width:100%;max-width:650px;min-height:480px;margin:20px auto;padding:45px 3%;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.heart-outline{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.heart-outline path{fill:rgba(255,70,120,.055);stroke:#ff9ab5;stroke-width:3;stroke-linejoin:round;filter:drop-shadow(0 0 8px #ff4775);animation:heartGlow 2s ease-in-out infinite alternate}
-@keyframes heartGlow{to{stroke:#ffe3a0;filter:drop-shadow(0 0 17px #ff4775)}}
-#messages{position:relative;z-index:2;width:100%;max-width:620px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;justify-items:center;align-items:stretch}
-.note{min-width:0;width:100%;min-height:72px;padding:9px 7px;text-align:left;border-radius:10px;color:#583346;background:#fff0b8;box-shadow:2px 5px 12px #16040b55;overflow-wrap:anywhere;position:relative;animation:appear .5s ease both}
+
+:root{
+  --gold:#ffe3a0;
+  --pink:#ff9ab5;
+  --wine:#3b101e;
+}
+
+body{
+  margin:0;
+  padding:20px;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#70263d,#3b101e 55%,#18060d);
+  color:#ffe8b0;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+h1{
+  color:var(--gold);
+  font-size:clamp(27px,5vw,45px);
+  text-shadow:0 0 18px #e9ad55;
+  margin:15px 0;
+}
+
+.subtitle{
+  color:#ffe5bd;
+  font-size:16px;
+  margin-bottom:30px;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:25px;
+  align-items:start;
+}
+
+.panel,.guestbook-section{
+  padding:25px;
+  border:1px solid #d9ad5b;
+  border-radius:22px;
+  background:rgba(255,255,255,.07);
+  box-shadow:0 10px 35px #10020855;
+}
+
+h2{
+  color:#ffe4a0;
+  font-size:23px;
+}
+
+/* KHUNG TRÁI TIM */
+.heart-board{
+  position:relative;
+  width:100%;
+  max-width:650px;
+  min-height:480px;
+  margin:20px auto;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  isolation:isolate;
+}
+
+.heart-outline{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+
+.heart-outline path{
+  fill:rgba(255,70,120,.055);
+  stroke:#ff9ab5;
+  stroke-width:3;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 8px #ff4775);
+  animation:heartGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes heartGlow{
+  to{
+    stroke:#ffe3a0;
+    filter:drop-shadow(0 0 17px #ff4775);
+  }
+}
+
+/*
+  KHU VỰC GHÉP MẢNH:
+  Các lời chúc được đặt độc lập theo tọa độ,
+  không sử dụng bố cục các hàng thông thường.
+*/
+#messages{
+  position:absolute;
+  z-index:2;
+  left:10%;
+  top:10%;
+  width:80%;
+  height:80%;
+  margin:0;
+  display:block;
+  overflow:visible;
+}
+
+.note{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-width:0;
+  min-height:0;
+  padding:6px;
+  text-align:left;
+  border:1px solid rgba(125,65,85,.16);
+  border-radius:7px;
+  color:#583346;
+  background:#fff0b8;
+  box-shadow:1px 2px 5px #16040b55;
+  overflow:hidden;
+  overflow-wrap:anywhere;
+  animation:appear .5s ease both;
+  transform:translate(-50%,-50%);
+}
+
 .note:nth-child(3n+2){background:#ffdce7}
 .note:nth-child(3n){background:#e5f0d9}
 .note:nth-child(4n){background:#e4e4ff}
-.note-name{display:block;font-size:11px;font-weight:bold;margin-bottom:6px;padding-bottom:5px;border-bottom:1px dashed #a77b8a}
-.note-message{font-size:11px;line-height:1.45;white-space:pre-wrap}
-@keyframes appear{from{opacity:0;transform:translateY(12px) scale(.92)}to{opacity:1;transform:none}}
-.heart-empty{position:relative;z-index:1;max-width:240px;color:#ffe5bc;font-size:16px;line-height:1.7;padding:15px}
-.big-heart{display:block;font-size:55px;color:#ff8cae;margin-bottom:10px;animation:beat 1.2s infinite}
-@keyframes beat{50%{transform:scale(1.16)}}
-.message-count{position:relative;z-index:2;margin-top:15px;color:#ffe3a0;font-size:14px}
+.note:nth-child(5n){background:#fff0b8}
+.note:nth-child(6n){background:#f8d9b7}
+
+.note-name{
+  display:block;
+  flex-shrink:0;
+  font-size:clamp(7px,1.1vw,11px);
+  font-weight:bold;
+  margin-bottom:4px;
+  padding-bottom:3px;
+  border-bottom:1px dashed #a77b8a;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.note-message{
+  font-size:clamp(7px,1.05vw,10px);
+  line-height:1.35;
+  white-space:pre-wrap;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:5;
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translate(-50%,-40%) scale(.85);
+  }
+  to{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
+}
+
+.heart-empty{
+  position:relative;
+  z-index:1;
+  max-width:240px;
+  color:#ffe5bc;
+  font-size:16px;
+  line-height:1.7;
+  padding:15px;
+}
+
+.big-heart{
+  display:block;
+  font-size:55px;
+  color:#ff8cae;
+  margin-bottom:10px;
+  animation:beat 1.2s infinite;
+}
+
+@keyframes beat{
+  50%{transform:scale(1.16)}
+}
+
+.message-count{
+  position:relative;
+  z-index:2;
+  margin-top:15px;
+  color:#ffe3a0;
+  font-size:14px;
+}
+
 .random-section{margin-top:25px}
-.random-button{background:linear-gradient(90deg,#ff9ab5,#ffe0a6);color:#542035;margin:8px}
-button{padding:13px 25px;border:0;border-radius:30px;background:linear-gradient(90deg,#d9a63e,#ffe7a0);color:#451020;font-size:15px;font-weight:bold;cursor:pointer;transition:.2s}
-button:hover{transform:translateY(-2px);box-shadow:0 5px 15px #e6b84e55}
-button:disabled{opacity:.6;cursor:wait}
-input,textarea,select{width:100%;padding:13px;margin:9px 0;border:1px solid #e6c16b;border-radius:11px;font-size:15px;font-family:Arial,sans-serif;outline:none;background:#fffaf1;color:#48202d}
-textarea{height:125px;resize:vertical}
-input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px #f5cf7a55}
-#status,#guestbookStatus{min-height:24px;color:#ffe5a0;overflow-wrap:anywhere}
-#qrcode{display:inline-block;padding:10px;background:white;border-radius:8px;margin:8px;min-width:20px;min-height:20px}
-.qr-title{margin-top:25px;color:#ffe5a0}
+
+.random-button{
+  background:linear-gradient(90deg,#ff9ab5,#ffe0a6);
+  color:#542035;
+  margin:8px;
+}
+
+button{
+  padding:13px 25px;
+  border:0;
+  border-radius:30px;
+  background:linear-gradient(90deg,#d9a63e,#ffe7a0);
+  color:#451020;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px #e6b84e55;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin:9px 0;
+  border:1px solid #e6c16b;
+  border-radius:11px;
+  font-size:15px;
+  font-family:Arial,sans-serif;
+  outline:none;
+  background:#fffaf1;
+  color:#48202d;
+}
+
+textarea{
+  height:125px;
+  resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+  box-shadow:0 0 0 3px #f5cf7a55;
+}
+
+#status,#guestbookStatus{
+  min-height:24px;
+  color:#ffe5a0;
+  overflow-wrap:anywhere;
+}
+
+#qrcode{
+  display:inline-block;
+  padding:10px;
+  background:white;
+  border-radius:8px;
+  margin:8px;
+  min-width:20px;
+  min-height:20px;
+}
+
+.qr-title{
+  margin-top:25px;
+  color:#ffe5a0;
+}
+
 .copy-button{margin-top:8px}
-.guestbook-section{max-width:1100px;margin:30px auto}
-.guestbook-intro{color:#ffe5bd;line-height:1.7}
-.guestbook-form{max-width:650px;margin:20px auto}
-.guestbook-form label{display:block;text-align:left;margin-top:12px;color:#ffe5bd;font-weight:bold}
-.photo-hint{color:#ffe5bd;font-size:13px;margin:8px 0 15px}
-.customize{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin:12px 0}
-.customize label{font-size:14px;color:#ffe5bd;font-weight:bold}
+
+.guestbook-section{
+  max-width:1100px;
+  margin:30px auto;
+}
+
+.guestbook-intro{
+  color:#ffe5bd;
+  line-height:1.7;
+}
+
+.guestbook-form{
+  max-width:650px;
+  margin:20px auto;
+}
+
+.guestbook-form label{
+  display:block;
+  text-align:left;
+  margin-top:12px;
+  color:#ffe5bd;
+  font-weight:bold;
+}
+
+.photo-hint{
+  color:#ffe5bd;
+  font-size:13px;
+  margin:8px 0 15px;
+}
+
+.customize{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  text-align:left;
+  margin:12px 0;
+}
+
+.customize label{
+  font-size:14px;
+  color:#ffe5bd;
+  font-weight:bold;
+}
+
 .customize select{margin:7px 0}
-.guestbook-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:25px}
-.guestbook-entry{background:#fff0d0;color:#583346;padding:18px;border-radius:15px;text-align:left;box-shadow:0 5px 15px #10020855;overflow-wrap:anywhere}
-.guestbook-entry h3{color:#8d3455;margin:0 0 8px;font-size:18px}
-.guestbook-class{color:#98677a;font-size:13px;margin-bottom:10px}
-.guestbook-entry p{white-space:pre-wrap;line-height:1.6;margin:10px 0}
-.guestbook-date{font-size:12px;color:#936a78;border-top:1px dashed #c9a4ad;padding-top:10px;margin-top:12px}
-.guestbook-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
-.guestbook-photos img{width:100%;height:150px;object-fit:cover;border-radius:9px;cursor:pointer}
-.guestbook-empty{color:#ffe5bd;line-height:1.7;padding:20px;grid-column:1/-1}
-.float{position:fixed;bottom:-35px;pointer-events:none;z-index:10;animation:fly 8s linear forwards;user-select:none}
-@keyframes fly{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.9}90%{opacity:.8}100%{transform:translateY(-110vh) rotate(50deg);opacity:0}}
-.overlay{position:fixed;inset:0;z-index:50;background:rgba(15,3,10,.78);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}
+
+.guestbook-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+
+.guestbook-entry{
+  background:#fff0d0;
+  color:#583346;
+  padding:18px;
+  border-radius:15px;
+  text-align:left;
+  box-shadow:0 5px 15px #10020855;
+  overflow-wrap:anywhere;
+}
+
+.guestbook-entry h3{
+  color:#8d3455;
+  margin:0 0 8px;
+  font-size:18px;
+}
+
+.guestbook-class{
+  color:#98677a;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.guestbook-entry p{
+  white-space:pre-wrap;
+  line-height:1.6;
+  margin:10px 0;
+}
+
+.guestbook-date{
+  font-size:12px;
+  color:#936a78;
+  border-top:1px dashed #c9a4ad;
+  padding-top:10px;
+  margin-top:12px;
+}
+
+.guestbook-photos{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+
+.guestbook-photos img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:9px;
+  cursor:pointer;
+}
+
+.guestbook-empty{
+  color:#ffe5bd;
+  line-height:1.7;
+  padding:20px;
+  grid-column:1/-1;
+}
+
+.float{
+  position:fixed;
+  bottom:-35px;
+  pointer-events:none;
+  z-index:10;
+  animation:fly 8s linear forwards;
+  user-select:none;
+}
+
+@keyframes fly{
+  0%{transform:translateY(0) rotate(0);opacity:0}
+  10%{opacity:.9}
+  90%{opacity:.8}
+  100%{transform:translateY(-110vh) rotate(50deg);opacity:0}
+}
+
+/* THIỆP KHÁM PHÁ */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  background:rgba(15,3,10,.78);
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
 .overlay.show{display:flex}
-.wish-card{position:relative;width:min(520px,100%);max-height:90vh;overflow:auto;padding:30px 24px 24px;border:3px double #d7a84f;border-radius:24px;background:linear-gradient(145deg,#fff5d9,#ffdce7);color:#623148;box-shadow:0 15px 60px #0009;animation:cardIn .4s ease both}
-@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.94)}to{opacity:1;transform:none}}
+
+.wish-card{
+  position:relative;
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:30px 24px 24px;
+  border:3px double #d7a84f;
+  border-radius:24px;
+  background:linear-gradient(145deg,#fff5d9,#ffdce7);
+  color:#623148;
+  box-shadow:0 15px 60px #0009;
+  animation:cardIn .4s ease both;
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(20px) scale(.94)}
+  to{opacity:1;transform:none}
+}
+
 .wish-card .gift{font-size:45px}
 .wish-card h2{color:#963e60}
-.wish-card .wish-text{font-size:18px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;margin:20px 0}
-.wish-card .wish-sender{border-top:1px dashed #c88da2;padding-top:13px;color:#98506b;font-weight:bold}
-.wish-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.wish-actions button{font-size:13px;padding:11px 16px}
-.close-wish{position:absolute;right:13px;top:10px;border:0;background:transparent;font-size:26px;color:#8c4560;padding:3px 9px}
+
+.wish-card .wish-text{
+  font-size:18px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  margin:20px 0;
+}
+
+.wish-card .wish-sender{
+  border-top:1px dashed #c88da2;
+  padding-top:13px;
+  color:#98506b;
+  font-weight:bold;
+}
+
+.wish-actions{
+  display:flex;
+  gap:9px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.wish-actions button{
+  font-size:13px;
+  padding:11px 16px;
+}
+
+.close-wish{
+  position:absolute;
+  right:13px;
+  top:10px;
+  border:0;
+  background:transparent;
+  font-size:26px;
+  color:#8c4560;
+  padding:3px 9px;
+}
+
+/* ĐIỆN THOẠI */
 @media(max-width:700px){
-body{padding:12px}
-main{grid-template-columns:1fr;gap:18px}
-.panel{padding:16px}
-.heart-board{min-height:360px;padding:35px 2%}
-.note{padding:7px 5px}
-.note-name,.note-message{font-size:10px}
-.guestbook-section{padding:16px}
-.guestbook-list{grid-template-columns:1fr}
-.guestbook-photos img{height:125px}
-.customize{grid-template-columns:1fr}
-.wish-card{padding:27px 17px 20px}
-.wish-card .wish-text{font-size:16px}
+  body{padding:12px}
+
+  main{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .panel{padding:16px}
+
+  .heart-board{
+    min-height:360px;
+    padding:0;
+  }
+
+  #messages{
+    left:9%;
+    top:11%;
+    width:82%;
+    height:78%;
+  }
+
+  .note{padding:4px}
+
+  .note-name{
+    font-size:8px;
+    margin-bottom:3px;
+    padding-bottom:2px;
+  }
+
+  .note-message{
+    font-size:8px;
+    line-height:1.25;
+    -webkit-line-clamp:4;
+  }
+
+  .guestbook-section{padding:16px}
+  .guestbook-list{grid-template-columns:1fr}
+  .guestbook-photos img{height:125px}
+  .customize{grid-template-columns:1fr}
+  .wish-card{padding:27px 17px 20px}
+  .wish-card .wish-text{font-size:16px}
 }
 </style>
 </head>
+
 <body>
 
 <h1>♥ Tri ân thầy cô 20/11 ♥</h1>
 <p class="subtitle">Mỗi lời chúc nhỏ ghép thành một trái tim lớn!</p>
 
 <main>
+
 <section class="panel">
-<h2>♥ Trái tim tri ân ♥</h2>
-<div class="heart-board">
-<svg class="heart-outline" viewBox="0 0 500 460" preserveAspectRatio="xMidYMid meet">
-<path d="M250 435 C220 405 25 265 25 145 C25 35 155 5 250 105 C345 5 475 35 475 145 C475 265 280 405 250 435 Z"/>
-</svg>
-<div class="heart-empty" id="emptyHeart">
-<span class="big-heart">♥</span>
-Hãy gửi những lời chúc yêu thương để cùng tạo nên trái tim tri ân thầy cô nhé!
-</div>
-<div id="messages"></div>
-</div>
-<div class="message-count" id="messageCount">Đang tải lời chúc ♥</div>
-<div class="random-section">
-<button id="randomButton" class="random-button" type="button">🎁 Khám phá lời chúc ngẫu nhiên</button>
-</div>
+  <h2>♥ Trái tim tri ân ♥</h2>
+
+  <div class="heart-board">
+
+    <svg class="heart-outline" viewBox="0 0 500 460" preserveAspectRatio="xMidYMid meet">
+      <path d="M250 435 C220 405 25 265 25 145 C25 35 155 5 250 105 C345 5 475 35 475 145 C475 265 280 405 250 435 Z"/>
+    </svg>
+
+    <div class="heart-empty" id="emptyHeart">
+      <span class="big-heart">♥</span>
+      Hãy gửi những lời chúc yêu thương để cùng tạo nên trái tim tri ân thầy cô nhé!
+    </div>
+
+    <div id="messages"></div>
+  </div>
+
+  <div class="message-count" id="messageCount">Đang tải lời chúc ♥</div>
+
+  <div class="random-section">
+    <button id="randomButton" class="random-button" type="button">
+      🎁 Khám phá lời chúc ngẫu nhiên
+    </button>
+  </div>
 </section>
 
 <section class="panel">
-<h2>Gửi lời chúc đến thầy cô</h2>
-<form id="form">
-<input id="name" maxlength="32" placeholder="Tên của bạn / Tập thể lớp" required>
-<textarea id="message" maxlength="180" placeholder="Viết lời chúc của bạn..." required></textarea>
-<button type="submit">GỬI LỜI CHÚC ♥</button>
-</form>
-<p id="status" aria-live="polite"></p>
-<h3 class="qr-title">Quét QR để gửi lời chúc</h3>
-<div id="qrcode"></div>
-<p><button id="copy" class="copy-button" type="button">Sao chép đường link</button></p>
+  <h2>Gửi lời chúc đến thầy cô</h2>
+
+  <form id="form">
+    <input id="name" maxlength="32" placeholder="Tên của bạn / Tập thể lớp" required>
+    <textarea id="message" maxlength="180" placeholder="Viết lời chúc của bạn..." required></textarea>
+    <button type="submit">GỬI LỜI CHÚC ♥</button>
+  </form>
+
+  <p id="status" aria-live="polite"></p>
+
+  <h3 class="qr-title">Quét QR để gửi lời chúc</h3>
+  <div id="qrcode"></div>
+
+  <p>
+    <button id="copy" class="copy-button" type="button">Sao chép đường link</button>
+  </p>
 </section>
+
 </main>
 
 <section class="guestbook-section">
-<h2>📖 Sổ lưu bút kỷ niệm</h2>
-<p class="guestbook-intro">Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ bên thầy cô, bạn bè nhé! ♥</p>
 
-<form id="guestbookForm" class="guestbook-form">
-<input id="guestName" maxlength="40" placeholder="Tên của bạn" required>
-<input id="guestClass" maxlength="30" placeholder="Lớp của bạn">
-<textarea id="guestMemory" maxlength="2000" placeholder="Viết kỷ niệm của bạn..." required></textarea>
+  <h2>📖 Sổ lưu bút kỷ niệm</h2>
 
-<div class="customize">
-<label>Màu giấy lưu bút
-<select id="paperColor">
-<option value="cream">Kem dịu dàng</option>
-<option value="pink">Hồng pastel</option>
-<option value="yellow">Vàng nhạt</option>
-<option value="wine">Đỏ đô</option>
-</select>
-</label>
-<label>Nhãn dán trang trí
-<select id="sticker">
-<option value="💗">💗 Trái tim</option>
-<option value="🌸">🌸 Hoa nhỏ</option>
-<option value="⭐">⭐ Ngôi sao</option>
-<option value="🎀">🎀 Nơ xinh</option>
-<option value="🍀">🍀 May mắn</option>
-<option value="📚">📚 Sách vở</option>
-<option value="✨">✨ Lấp lánh</option>
-</select>
-</label>
-</div>
+  <p class="guestbook-intro">
+    Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ bên thầy cô, bạn bè nhé! ♥
+  </p>
 
-<label for="guestPhotos">📷 Chọn ảnh kỷ niệm</label>
-<input id="guestPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
-<p class="photo-hint">Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB. Ảnh là tùy chọn.</p>
-<button type="submit">LƯU KỶ NIỆM ♥</button>
-</form>
+  <form id="guestbookForm" class="guestbook-form">
 
-<p id="guestbookStatus" aria-live="polite"></p>
-<h2>♥ Những kỷ niệm được chia sẻ ♥</h2>
-<div id="guestbookList" class="guestbook-list">
-<div class="guestbook-empty">Đang tải những kỷ niệm...</div>
-</div>
+    <input id="guestName" maxlength="40" placeholder="Tên của bạn" required>
+    <input id="guestClass" maxlength="30" placeholder="Lớp của bạn">
+
+    <textarea id="guestMemory" maxlength="2000" placeholder="Viết kỷ niệm của bạn..." required></textarea>
+
+    <div class="customize">
+
+      <label>
+        Màu giấy lưu bút
+        <select id="paperColor">
+          <option value="cream">Kem dịu dàng</option>
+          <option value="pink">Hồng pastel</option>
+          <option value="yellow">Vàng nhạt</option>
+          <option value="wine">Đỏ đô</option>
+        </select>
+      </label>
+
+      <label>
+        Nhãn dán trang trí
+        <select id="sticker">
+          <option value="💗">💗 Trái tim</option>
+          <option value="🌸">🌸 Hoa nhỏ</option>
+          <option value="⭐">⭐ Ngôi sao</option>
+          <option value="🎀">🎀 Nơ xinh</option>
+          <option value="🍀">🍀 May mắn</option>
+          <option value="📚">📚 Sách vở</option>
+          <option value="✨">✨ Lấp lánh</option>
+        </select>
+      </label>
+
+    </div>
+
+    <label for="guestPhotos">📷 Chọn ảnh kỷ niệm</label>
+
+    <input
+      id="guestPhotos"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      multiple
+    >
+
+    <p class="photo-hint">
+      Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB. Ảnh là tùy chọn.
+    </p>
+
+    <button type="submit">LƯU KỶ NIỆM ♥</button>
+
+  </form>
+
+  <p id="guestbookStatus" aria-live="polite"></p>
+
+  <h2>♥ Những kỷ niệm được chia sẻ ♥</h2>
+
+  <div id="guestbookList" class="guestbook-list">
+    <div class="guestbook-empty">Đang tải những kỷ niệm...</div>
+  </div>
+
 </section>
 
+<!-- THIỆP KHÁM PHÁ -->
 <div class="overlay" id="wishOverlay" role="dialog" aria-modal="true" aria-labelledby="wishHeading">
-<div class="wish-card">
-<button class="close-wish" id="closeWish" type="button" aria-label="Đóng">×</button>
-<div class="gift">💌</div>
-<h2 id="wishHeading">Một lời chúc dành cho bạn</h2>
-<div id="randomMessage" class="wish-text"></div>
-<div id="randomName" class="wish-sender"></div>
-<div class="wish-actions">
-<button id="speakButton" type="button">🔊 Đọc lời chúc</button>
-<button id="anotherButton" type="button">✨ Lời chúc khác</button>
-<button id="stopSpeakButton" type="button">⏹ Dừng đọc</button>
-</div>
-</div>
+
+  <div class="wish-card">
+
+    <button class="close-wish" id="closeWish" type="button" aria-label="Đóng">×</button>
+
+    <div class="gift">💌</div>
+
+    <h2 id="wishHeading">Một lời chúc dành cho bạn</h2>
+
+    <div id="randomMessage" class="wish-text"></div>
+    <div id="randomName" class="wish-sender"></div>
+
+    <div class="wish-actions">
+      <button id="speakButton" type="button">🔊 Đọc lời chúc</button>
+      <button id="anotherButton" type="button">✨ Lời chúc khác</button>
+      <button id="stopSpeakButton" type="button">⏹ Dừng đọc</button>
+    </div>
+
+  </div>
 </div>
 
 <script>
@@ -192,7 +685,10 @@ let allMessages = [];
 let lastRandomIndex = -1;
 let lastRenderedData = "";
 
-/* TẠO MÃ QR */
+/* =========================
+   TẠO MÃ QR
+========================= */
+
 function createQR(){
   const qrBox = $("qrcode");
   qrBox.replaceChildren();
@@ -210,10 +706,14 @@ function createQR(){
     qrBox.textContent="Không tải được thư viện QR. Hãy tải lại trang.";
   }
 }
+
 createQR();
 
-/* SAO CHÉP LINK */
-$("copy").onclick=async()=>{
+/* =========================
+   SAO CHÉP LINK
+========================= */
+
+$("copy").onclick = async()=>{
   try{
     await navigator.clipboard.writeText(location.href);
     $("status").textContent="♥ Đã sao chép đường link!";
@@ -222,54 +722,218 @@ $("copy").onclick=async()=>{
   }
 };
 
-/* XẾP LỜI CHÚC THÀNH HÌNH TRÁI TIM */
-function getHeartSlots(count,cols){
-  if(!count)return{rows:1,slots:[]};
+/* =========================
+   TẠO BỐ CỤC GHÉP TRÁI TIM
+   Các mảnh được phân bố so le
+   theo vùng hình trái tim.
+========================= */
 
-  let rows=Math.max(7,Math.ceil(count*1.45));
-  let slots=[];
+function heartEquation(x,y){
+  return Math.pow(x*x+y*y-1,3)-x*x*Math.pow(y,3);
+}
 
-  while(rows<220){
-    slots=[];
+function getHeartSlots(count){
+
+  if(!count){
+    return {slots:[],cols:1,rows:1};
+  }
+
+  /*
+    Tìm mật độ ô phù hợp với số lời chúc.
+    Các ô được xếp so le như những viên ghép mosaic.
+  */
+
+  let best = null;
+  let bestScore = Infinity;
+
+  for(let cols=2;cols<=70;cols++){
+
+    const expectedRows=Math.round(cols*.92);
+
+    for(let rows=Math.max(2,expectedRows-3);rows<=expectedRows+3;rows++){
+
+      const candidates=[];
+
+      for(let r=0;r<rows;r++){
+
+        const offset=(r%2)*.5;
+
+        for(let c=-1;c<cols;c++){
+
+          const px=(c+.5+offset)/cols;
+          const py=(r+.5)/rows;
+
+          if(px<0.015||px>0.985)continue;
+
+          const x=(px-.5)*2.5;
+          const y=1.18-py*2.36;
+
+          if(heartEquation(x,y)<=0){
+            candidates.push({
+              x:px,
+              y:py,
+              row:r,
+              col:c
+            });
+          }
+        }
+      }
+
+      if(candidates.length<count)continue;
+
+      const excess=candidates.length-count;
+      const ratioPenalty=Math.abs((cols/rows)-1.087);
+
+      const score=excess*10+ratioPenalty;
+
+      if(score<bestScore){
+        bestScore=score;
+        best={
+          candidates,
+          cols,
+          rows
+        };
+      }
+
+      if(excess===0)break;
+    }
+
+    if(best&&best.candidates.length===count)break;
+  }
+
+  /*
+    Trường hợp số lời chúc lớn hơn mật độ tìm kiếm:
+    tăng độ phân giải để có đủ vị trí.
+  */
+
+  if(!best){
+
+    const cols=Math.ceil(Math.sqrt(count/0.6*1.087));
+    const rows=Math.ceil(cols/1.087);
+    const candidates=[];
 
     for(let r=0;r<rows;r++){
-      for(let c=0;c<cols;c++){
-        const x=((c+.5)/cols)*2.5-1.25;
-        const y=1.18-((r+.5)/rows)*2.36;
-        const value=Math.pow(x*x+y*y-1,3)-x*x*Math.pow(y,3);
 
-        if(value<=0){
-          slots.push({row:r,col:c});
+      const offset=(r%2)*.5;
+
+      for(let c=-1;c<cols;c++){
+
+        const px=(c+.5+offset)/cols;
+        const py=(r+.5)/rows;
+
+        if(px<0.015||px>0.985)continue;
+
+        const x=(px-.5)*2.5;
+        const y=1.18-py*2.36;
+
+        if(heartEquation(x,y)<=0){
+          candidates.push({x:px,y:py,row:r,col:c});
         }
       }
     }
 
-    if(slots.length>=count)break;
-    rows+=2;
+    best={candidates,cols,rows};
   }
 
-  if(count===1){
-    return{
-      rows,
-      slots:[{row:Math.floor(rows*.43),col:Math.floor(cols/2)}]
-    };
+  let candidates=best.candidates;
+
+  /*
+    Nếu có nhiều vị trí hơn số lời chúc,
+    chọn các vị trí phân bố đều khắp trái tim.
+    Tránh dồn các mảnh vào một góc.
+  */
+
+  if(candidates.length>count){
+
+    const selected=[];
+
+    const centerIndex=candidates.reduce((bestIndex,p,index)=>{
+      const distance=Math.pow(p.x-.5,2)+Math.pow(p.y-.42,2);
+
+      if(distance<best)return distance;
+      return best;
+    },Infinity);
+
+    let firstIndex=0;
+    let firstDistance=Infinity;
+
+    candidates.forEach((p,index)=>{
+      const distance=Math.pow(p.x-.5,2)+Math.pow(p.y-.42,2);
+
+      if(distance<firstDistance){
+        firstDistance=distance;
+        firstIndex=index;
+      }
+    });
+
+    selected.push(candidates[firstIndex]);
+
+    const used=new Set([firstIndex]);
+
+    while(selected.length<count){
+
+      let bestIndex=-1;
+      let bestDistance=-1;
+
+      candidates.forEach((p,index)=>{
+
+        if(used.has(index))return;
+
+        let nearest=Infinity;
+
+        selected.forEach(s=>{
+          const dx=(p.x-s.x)*1.087;
+          const dy=p.y-s.y;
+          const distance=dx*dx+dy*dy;
+
+          if(distance<nearest)nearest=distance;
+        });
+
+        if(nearest>bestDistance){
+          bestDistance=nearest;
+          bestIndex=index;
+        }
+      });
+
+      if(bestIndex<0)break;
+
+      used.add(bestIndex);
+      selected.push(candidates[bestIndex]);
+    }
+
+    candidates=selected;
   }
 
-  const selected=[];
+  /*
+    Kích thước từng mảnh tự điều chỉnh theo mật độ.
+  */
 
-  for(let i=0;i<count;i++){
-    const index=Math.round(i*(slots.length-1)/(count-1));
-    selected.push(slots[index]);
-  }
+  const densityScale=Math.min(
+    1.18,
+    Math.sqrt(best.candidates.length/count)
+  );
 
-  return{rows,slots:selected};
+  return {
+    cols:best.cols,
+    rows:best.rows,
+    scale:densityScale,
+    slots:candidates
+  };
 }
 
-/* TẢI VÀ HIỂN THỊ LỜI CHÚC */
+/* =========================
+   TẢI VÀ HIỂN THỊ LỜI CHÚC
+========================= */
+
 async function loadMessages(){
+
   try{
+
     const response=await fetch("/api/messages",{cache:"no-store"});
-    if(!response.ok)throw new Error("Máy chủ không tải được lời chúc.");
+
+    if(!response.ok){
+      throw new Error("Máy chủ không tải được lời chúc.");
+    }
 
     const data=await response.json();
     const messages=Array.isArray(data)?data:[];
@@ -277,80 +941,120 @@ async function loadMessages(){
     allMessages=messages;
 
     const currentData=JSON.stringify(messages);
+
     if(currentData===lastRenderedData)return;
+
     lastRenderedData=currentData;
 
     const box=$("messages");
 
     if(!messages.length){
+
       box.replaceChildren();
+
       $("emptyHeart").style.display="block";
       $("messageCount").textContent="Chờ những lời chúc đầu tiên ♥";
       $("randomButton").disabled=true;
+
       return;
     }
 
     $("randomButton").disabled=false;
     $("emptyHeart").style.display="none";
 
-    const cols=window.matchMedia("(max-width:700px)").matches?3:5;
-    const layout=getHeartSlots(messages.length,cols);
+    const layout=getHeartSlots(messages.length);
 
-    box.style.gridTemplateColumns=`repeat(${cols},minmax(0,1fr))`;
-    box.style.gridTemplateRows=`repeat(${layout.rows},minmax(72px,auto))`;
     box.replaceChildren();
 
     messages.forEach((m,index)=>{
+
       const slot=layout.slots[index];
+
       if(!slot)return;
 
       const note=document.createElement("div");
+
       note.className="note";
-      note.style.gridColumn=String(slot.col+1);
-      note.style.gridRow=String(slot.row+1);
-      note.style.animationDelay=`${Math.min(index*.04,1)}s`;
+
+      /*
+        Tọa độ riêng cho từng mảnh ghép.
+        Các mảnh không được xếp thành danh sách hàng.
+      */
+
+      note.style.left=(slot.x*100)+"%";
+      note.style.top=(slot.y*100)+"%";
+
+      const scale=layout.scale||1;
+
+      note.style.width=(100/layout.cols*scale*1.04)+"%";
+      note.style.height=(100/layout.rows*scale*1.04)+"%";
+
+      note.style.animationDelay=Math.min(index*.025,1)+"s";
 
       const name=document.createElement("span");
+
       name.className="note-name";
       name.textContent="♥ "+(m.name||"Ẩn danh");
 
       const message=document.createElement("div");
+
       message.className="note-message";
       message.textContent=m.message||"";
 
+      note.title=(m.name||"Ẩn danh")+": "+(m.message||"");
+
       note.append(name,message);
       box.appendChild(note);
+
     });
 
-    $("messageCount").textContent=`♥ ${messages.length} lời chúc đã cùng tạo nên trái tim!`;
+    $("messageCount").textContent=
+      `♥ ${messages.length} lời chúc đã cùng tạo nên trái tim!`;
+
   }catch(error){
+
     console.error("Lỗi tải lời chúc:",error);
-    $("messageCount").textContent="Chưa tải được lời chúc. Vui lòng thử tải lại trang.";
+
+    $("messageCount").textContent=
+      "Chưa tải được lời chúc. Vui lòng thử tải lại trang.";
+
   }
 }
 
-/* THIỆP LỜI CHÚC NGẪU NHIÊN */
+/* =========================
+   THIỆP LỜI CHÚC NGẪU NHIÊN
+========================= */
+
 function showRandomWish(){
+
   if(!allMessages.length){
-    $("randomMessage").textContent="Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! ♥";
+
+    $("randomMessage").textContent=
+      "Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! ♥";
+
     $("randomName").textContent="";
     $("wishOverlay").classList.add("show");
+
     return;
   }
 
   let index=Math.floor(Math.random()*allMessages.length);
 
   if(allMessages.length>1){
+
     while(index===lastRandomIndex){
       index=Math.floor(Math.random()*allMessages.length);
     }
+
   }
 
   lastRandomIndex=index;
+
   const wish=allMessages[index];
 
   $("randomMessage").textContent=wish.message||"";
   $("randomName").textContent="♥ Gửi bởi: "+(wish.name||"Ẩn danh");
+
   $("wishOverlay").classList.add("show");
 }
 
@@ -363,19 +1067,34 @@ $("anotherButton").onclick=showRandomWish;
 
 $("closeWish").onclick=()=>{
   $("wishOverlay").classList.remove("show");
-  if("speechSynthesis" in window)speechSynthesis.cancel();
+
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
 };
 
 $("wishOverlay").addEventListener("click",event=>{
-  if(event.target===$("wishOverlay"))$("closeWish").click();
+
+  if(event.target===$("wishOverlay")){
+    $("closeWish").click();
+  }
+
 });
 
 document.addEventListener("keydown",event=>{
-  if(event.key==="Escape")$("closeWish").click();
+
+  if(event.key==="Escape"){
+    $("closeWish").click();
+  }
+
 });
 
-/* GIỌNG ĐỌC TIẾNG VIỆT */
+/* =========================
+   GIỌNG ĐỌC TIẾNG VIỆT
+========================= */
+
 $("speakButton").onclick=()=>{
+
   if(!("speechSynthesis" in window)){
     alert("Trình duyệt này chưa hỗ trợ đọc văn bản.");
     return;
@@ -384,23 +1103,35 @@ $("speakButton").onclick=()=>{
   speechSynthesis.cancel();
 
   const text=$("randomMessage").textContent;
+
   if(!text)return;
 
   const utterance=new SpeechSynthesisUtterance(text);
+
   utterance.lang="vi-VN";
   utterance.rate=.9;
+
   speechSynthesis.speak(utterance);
 };
 
 $("stopSpeakButton").onclick=()=>{
-  if("speechSynthesis" in window)speechSynthesis.cancel();
+
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+  }
+
 };
 
-/* GỬI LỜI CHÚC */
+/* =========================
+   GỬI LỜI CHÚC
+========================= */
+
 $("form").onsubmit=async event=>{
+
   event.preventDefault();
 
   const button=$("form").querySelector('button[type="submit"]');
+
   const name=$("name").value.trim();
   const message=$("message").value.trim();
 
@@ -410,6 +1141,7 @@ $("form").onsubmit=async event=>{
   $("status").textContent="Đang gửi lời chúc...";
 
   try{
+
     const response=await fetch("/api/messages",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -419,36 +1151,60 @@ $("form").onsubmit=async event=>{
     const result=await response.json().catch(()=>({}));
 
     if(!response.ok){
-      throw new Error(result.error||result.message||"Không gửi được lời chúc.");
+      throw new Error(
+        result.error||result.message||"Không gửi được lời chúc."
+      );
     }
 
     $("status").textContent="♥ Gửi lời chúc thành công!";
+
     $("form").reset();
+
     lastRenderedData="";
+
     await loadMessages();
+
   }catch(error){
+
     console.error(error);
+
     $("status").textContent="Không gửi được: "+error.message;
+
   }finally{
+
     button.disabled=false;
+
   }
+
 };
 
-/* HIỂN THỊ SỔ LƯU BÚT */
+/* =========================
+   HIỂN THỊ SỔ LƯU BÚT
+========================= */
+
 function renderGuestbook(entries){
+
   const list=$("guestbookList");
+
   list.replaceChildren();
 
   if(!Array.isArray(entries)||!entries.length){
+
     const empty=document.createElement("div");
+
     empty.className="guestbook-empty";
-    empty.textContent="Chưa có kỷ niệm nào. Hãy là người đầu tiên chia sẻ nhé! ♥";
+    empty.textContent=
+      "Chưa có kỷ niệm nào. Hãy là người đầu tiên chia sẻ nhé! ♥";
+
     list.appendChild(empty);
+
     return;
   }
 
   entries.forEach(entry=>{
+
     const card=document.createElement("article");
+
     card.className="guestbook-entry";
 
     const colors={
@@ -459,28 +1215,41 @@ function renderGuestbook(entries){
     };
 
     const color=colors[entry.paper_color]||colors.cream;
+
     card.style.background=color;
 
     const title=document.createElement("h3");
-    title.textContent=(entry.sticker||"💗")+" "+(entry.sender_name||"Ẩn danh");
+
+    title.textContent=
+      (entry.sticker||"💗")+" "+(entry.sender_name||"Ẩn danh");
+
     card.appendChild(title);
 
     if(entry.class_name){
+
       const className=document.createElement("div");
+
       className.className="guestbook-class";
       className.textContent="Lớp: "+entry.class_name;
+
       card.appendChild(className);
+
     }
 
     const memory=document.createElement("p");
+
     memory.textContent=entry.memory||"";
+
     card.appendChild(memory);
 
     if(Array.isArray(entry.photos)&&entry.photos.length){
+
       const photoBox=document.createElement("div");
+
       photoBox.className="guestbook-photos";
 
       entry.photos.forEach(photo=>{
+
         const url=typeof photo==="string"
           ?photo
           :photo&&(photo.url||photo.publicUrl);
@@ -488,83 +1257,135 @@ function renderGuestbook(entries){
         if(!url)return;
 
         const img=document.createElement("img");
+
         img.src=url;
         img.alt="Ảnh kỷ niệm";
         img.loading="lazy";
-        img.onclick=()=>window.open(url,"_blank","noopener");
+
+        img.onclick=()=>{
+          window.open(url,"_blank","noopener");
+        };
+
         photoBox.appendChild(img);
+
       });
 
-      if(photoBox.children.length)card.appendChild(photoBox);
+      if(photoBox.children.length){
+        card.appendChild(photoBox);
+      }
+
     }
 
     if(entry.created_at){
+
       const date=document.createElement("div");
+
       date.className="guestbook-date";
 
       const parsed=new Date(entry.created_at);
+
       date.textContent=Number.isNaN(parsed.getTime())
         ?""
         :parsed.toLocaleString("vi-VN");
 
       card.appendChild(date);
+
     }
 
     list.appendChild(card);
+
   });
+
 }
 
-/* TẢI SỔ LƯU BÚT */
+/* =========================
+   TẢI SỔ LƯU BÚT
+========================= */
+
 async function loadGuestbook(){
+
   try{
+
     const response=await fetch("/api/guestbook",{cache:"no-store"});
-    if(!response.ok)throw new Error("Không tải được sổ lưu bút.");
+
+    if(!response.ok){
+      throw new Error("Không tải được sổ lưu bút.");
+    }
 
     const entries=await response.json();
+
     renderGuestbook(entries);
+
   }catch(error){
+
     console.error("Lỗi tải sổ lưu bút:",error);
-    $("guestbookList").textContent="Chưa tải được sổ lưu bút. Vui lòng thử tải lại trang.";
+
+    $("guestbookList").textContent=
+      "Chưa tải được sổ lưu bút. Vui lòng thử tải lại trang.";
+
   }
+
 }
 
-/* GỬI KỶ NIỆM VÀ ẢNH */
+/* =========================
+   GỬI KỶ NIỆM VÀ ẢNH
+========================= */
+
 $("guestbookForm").onsubmit=async event=>{
+
   event.preventDefault();
 
   const button=$("guestbookForm").querySelector('button[type="submit"]');
+
   const files=Array.from($("guestPhotos").files);
 
   if(files.length>5){
-    $("guestbookStatus").textContent="Bạn chỉ được chọn tối đa 5 ảnh.";
+
+    $("guestbookStatus").textContent=
+      "Bạn chỉ được chọn tối đa 5 ảnh.";
+
     return;
   }
 
   for(const file of files){
+
     if(file.size>5*1024*1024){
-      $("guestbookStatus").textContent=`Ảnh "${file.name}" vượt quá 5 MB.`;
+
+      $("guestbookStatus").textContent=
+        `Ảnh "${file.name}" vượt quá 5 MB.`;
+
       return;
     }
 
     if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
-      $("guestbookStatus").textContent="Chỉ hỗ trợ ảnh JPG, PNG hoặc WEBP.";
+
+      $("guestbookStatus").textContent=
+        "Chỉ hỗ trợ ảnh JPG, PNG hoặc WEBP.";
+
       return;
     }
+
   }
 
   const formData=new FormData();
+
   formData.append("name",$("guestName").value.trim());
   formData.append("className",$("guestClass").value.trim());
   formData.append("memory",$("guestMemory").value.trim());
   formData.append("paperColor",$("paperColor").value);
   formData.append("sticker",$("sticker").value);
 
-  files.forEach(file=>formData.append("photos",file));
+  files.forEach(file=>{
+    formData.append("photos",file);
+  });
 
   button.disabled=true;
-  $("guestbookStatus").textContent="Đang lưu kỷ niệm và tải ảnh lên...";
+
+  $("guestbookStatus").textContent=
+    "Đang lưu kỷ niệm và tải ảnh lên...";
 
   try{
+
     const response=await fetch("/api/guestbook",{
       method:"POST",
       body:formData
@@ -573,42 +1394,78 @@ $("guestbookForm").onsubmit=async event=>{
     const result=await response.json().catch(()=>({}));
 
     if(!response.ok){
-      throw new Error(result.error||result.message||"Không lưu được kỷ niệm.");
+
+      throw new Error(
+        result.error||result.message||"Không lưu được kỷ niệm."
+      );
+
     }
 
-    $("guestbookStatus").textContent="♥ Đã lưu kỷ niệm thành công!";
+    $("guestbookStatus").textContent=
+      "♥ Đã lưu kỷ niệm thành công!";
+
     $("guestbookForm").reset();
+
     await loadGuestbook();
+
   }catch(error){
+
     console.error(error);
+
     $("guestbookStatus").textContent="Lỗi: "+error.message;
+
   }finally{
+
     button.disabled=false;
+
   }
+
 };
 
-/* TRÁI TIM NHỎ BAY BAY */
+/* =========================
+   TRÁI TIM NHỎ BAY BAY
+========================= */
+
 function createFloatingHeart(){
+
   const heart=document.createElement("span");
+
   heart.className="float";
-  heart.textContent=["♥","♡","💕","💗","❤"][Math.floor(Math.random()*5)];
+
+  heart.textContent=["♥","♡","💕","💗","❤"][
+    Math.floor(Math.random()*5)
+  ];
 
   heart.style.left=Math.random()*100+"vw";
+
   heart.style.fontSize=(12+Math.random()*18)+"px";
-  heart.style.color=["#ff9ab5","#ffe3a0","#ff6f91","#ffdce7"][Math.floor(Math.random()*4)];
+
+  heart.style.color=[
+    "#ff9ab5",
+    "#ffe3a0",
+    "#ff6f91",
+    "#ffdce7"
+  ][Math.floor(Math.random()*4)];
+
   heart.style.animationDuration=(6+Math.random()*5)+"s";
 
   document.body.appendChild(heart);
+
   setTimeout(()=>heart.remove(),12000);
+
 }
 
-/* KHỞI ĐỘNG */
+/* =========================
+   KHỞI ĐỘNG
+========================= */
+
 loadMessages();
 loadGuestbook();
 
 setInterval(loadMessages,5000);
 setInterval(loadGuestbook,10000);
 setInterval(createFloatingHeart,900);
+
 </script>
 
 </body>
