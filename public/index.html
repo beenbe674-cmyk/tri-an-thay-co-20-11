@@ -1,6 +1,433 @@
-**Phần 2/2:**
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tri ân thầy cô 20/11</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-```javascript
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #70263d, #3b101e 55%, #18060d);
+  color: #ffe8b0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+h1 {
+  color: #ffe3a0;
+  font-size: clamp(27px, 5vw, 45px);
+  text-shadow: 0 0 18px #e9ad55;
+  margin: 15px 0;
+}
+
+.subtitle { color: #ffe5bd; font-size: 16px; margin-bottom: 30px; }
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.panel, .guestbook-section {
+  padding: 25px;
+  border: 1px solid #d9ad5b;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 10px 35px #10020855;
+}
+
+h2 { color: #ffe4a0; font-size: 23px; }
+
+/* TRÁI TIM LỜI CHÚC */
+.heart-board {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  min-height: 480px;
+  margin: 20px auto;
+  padding: 55px 3% 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart-outline path {
+  fill: rgba(255,70,120,0.055);
+  stroke: #ff9ab5;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px #ff4775);
+  animation: heartGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes heartGlow {
+  from { stroke: #ff9ab5; filter: drop-shadow(0 0 5px #ff4775); }
+  to { stroke: #ffe3a0; filter: drop-shadow(0 0 17px #ff4775); }
+}
+
+#messages {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  justify-items: center;
+  align-items: stretch;
+}
+
+.note {
+  min-width: 0;
+  width: 100%;
+  min-height: 105px;
+  padding: 10px 8px;
+  text-align: left;
+  border-radius: 10px;
+  color: #583346;
+  background: #fff0b8;
+  box-shadow: 2px 5px 12px #16040b55;
+  overflow-wrap: anywhere;
+  position: relative;
+  animation: appear 0.5s ease both;
+}
+
+.note:nth-child(3n+2) { background: #ffdce7; }
+.note:nth-child(3n) { background: #e5f0d9; }
+.note:nth-child(4n) { background: #e4e4ff; }
+
+.note-name {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #a77b8a;
+}
+
+.note-message { font-size: 11px; line-height: 1.5; white-space: pre-wrap; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.heart-empty {
+  position: relative;
+  z-index: 1;
+  max-width: 240px;
+  color: #ffe5bc;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 15px;
+}
+
+.big-heart {
+  display: block;
+  font-size: 55px;
+  color: #ff8cae;
+  margin-bottom: 10px;
+  animation: beat 1.2s infinite;
+}
+
+@keyframes beat { 50% { transform: scale(1.16); } }
+
+.message-count {
+  position: relative;
+  z-index: 2;
+  margin-top: 15px;
+  color: #ffe3a0;
+  font-size: 14px;
+}
+
+/* LỜI CHÚC NGẪU NHIÊN */
+.random-section { margin-top: 25px; }
+
+.random-button {
+  background: linear-gradient(90deg, #ff9ab5, #ffe0a6);
+  color: #542035;
+  margin: 8px;
+}
+
+.random-card {
+  display: none;
+  margin: 18px auto 5px;
+  padding: 22px 18px;
+  max-width: 480px;
+  border: 2px solid #ffcb82;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fff0c9, #ffdce7);
+  color: #623148;
+  box-shadow: 0 8px 25px #10020866;
+  animation: cardAppear 0.45s ease both;
+}
+
+.random-card.show { display: block; }
+
+@keyframes cardAppear {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.gift-icon { font-size: 35px; margin-bottom: 8px; }
+.random-title { font-size: 17px; font-weight: bold; color: #9b4263; margin-bottom: 12px; }
+.random-message { font-size: 16px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; margin: 12px 0; }
+.random-name { font-size: 13px; font-weight: bold; color: #a05270; border-top: 1px dashed #c88da2; padding-top: 12px; margin-top: 15px; }
+.another-button { margin-top: 12px; background: linear-gradient(90deg, #d9a63e, #ffe7a0); color: #451020; }
+
+/* FORM */
+input, textarea {
+  width: 100%;
+  padding: 14px;
+  margin: 9px 0;
+  border: 1px solid #e6c16b;
+  border-radius: 11px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  outline: none;
+  background: #fffaf1;
+  color: #48202d;
+}
+
+textarea { height: 125px; resize: vertical; }
+input:focus, textarea:focus { box-shadow: 0 0 0 3px #f5cf7a55; }
+
+button {
+  padding: 13px 25px;
+  border: 0;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #d9a63e, #ffe7a0);
+  color: #451020;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px #e6b84e55; }
+button:disabled { opacity: 0.6; cursor: wait; }
+
+#status, #guestbookStatus {
+  min-height: 24px;
+  color: #ffe5a0;
+  overflow-wrap: anywhere;
+}
+
+#qrcode {
+  display: inline-block;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  margin: 8px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.qr-title { margin-top: 25px; color: #ffe5a0; }
+.copy-button { margin-top: 8px; }
+
+/* SỔ LƯU BÚT */
+.guestbook-section {
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.guestbook-intro { color: #ffe5bd; line-height: 1.7; }
+.guestbook-form { max-width: 650px; margin: 20px auto; }
+.guestbook-form input, .guestbook-form textarea { display: block; }
+.guestbook-form textarea { min-height: 130px; }
+
+.guestbook-form label {
+  display: block;
+  text-align: left;
+  margin-top: 12px;
+  color: #ffe5bd;
+  font-weight: bold;
+}
+
+.guestbook-form input[type="file"] { background: #fffaf1; color: #48202d; }
+.photo-hint { color: #ffe5bd; font-size: 13px; margin: 8px 0 15px; }
+
+.guestbook-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.guestbook-entry {
+  background: #fff0d0;
+  color: #583346;
+  padding: 18px;
+  border-radius: 15px;
+  text-align: left;
+  box-shadow: 0 5px 15px #10020855;
+  overflow-wrap: anywhere;
+}
+
+.guestbook-entry h3 { color: #8d3455; margin: 0 0 8px; font-size: 18px; }
+.guestbook-class { color: #98677a; font-size: 13px; margin-bottom: 10px; }
+.guestbook-entry p { white-space: pre-wrap; line-height: 1.6; margin: 10px 0; }
+.guestbook-date { font-size: 12px; color: #936a78; border-top: 1px dashed #c9a4ad; padding-top: 10px; margin-top: 12px; }
+
+.guestbook-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.guestbook-photos img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.guestbook-empty { color: #ffe5bd; line-height: 1.7; padding: 20px; grid-column: 1 / -1; }
+
+/* TIM BAY BAY */
+.float {
+  position: fixed;
+  bottom: -35px;
+  pointer-events: none;
+  z-index: 10;
+  animation: fly 8s linear forwards;
+  user-select: none;
+}
+
+@keyframes fly {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-110vh) rotate(50deg); opacity: 0; }
+}
+
+/* ĐIỆN THOẠI */
+@media (max-width: 700px) {
+  body { padding: 12px; }
+  main { grid-template-columns: 1fr; gap: 18px; }
+  .panel { padding: 16px; }
+  .heart-board { min-height: 360px; padding: 45px 2% 35px; }
+  #messages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .note { min-height: 95px; padding: 8px 6px; }
+  .note-name, .note-message { font-size: 10px; }
+  .random-card { padding: 18px 13px; }
+  .random-message { font-size: 14px; }
+  .guestbook-section { padding: 16px; }
+  .guestbook-list { grid-template-columns: 1fr; }
+  .guestbook-photos img { height: 125px; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>♥ Tri ân thầy cô 20/11 ♥</h1>
+<p class="subtitle">Mỗi lời chúc nhỏ ghép thành một trái tim lớn!</p>
+
+<main>
+  <section class="panel">
+    <h2>♥ Trái tim tri ân ♥</h2>
+
+    <div class="heart-board">
+      <svg class="heart-outline" viewBox="0 0 500 460" preserveAspectRatio="xMidYMid meet">
+        <path d="M250 435 C220 405 25 265 25 145 C25 35 155 5 250 105 C345 5 475 35 475 145 C475 265 280 405 250 435 Z"/>
+      </svg>
+
+      <div class="heart-empty" id="emptyHeart">
+        <span class="big-heart">♥</span>
+        Hãy gửi những lời chúc yêu thương để cùng tạo nên trái tim tri ân thầy cô nhé!
+      </div>
+
+      <div id="messages"></div>
+    </div>
+
+    <div class="message-count" id="messageCount">Đang tải lời chúc ♥</div>
+
+    <div class="random-section">
+      <button id="randomButton" class="random-button" type="button">🎁 Khám phá lời chúc ngẫu nhiên</button>
+
+      <div id="randomCard" class="random-card">
+        <div class="gift-icon">💌</div>
+        <div class="random-title">Một lời chúc dành cho bạn</div>
+        <div id="randomMessage" class="random-message"></div>
+        <div id="randomName" class="random-name"></div>
+        <button id="anotherButton" class="another-button" type="button">✨ Đọc lời chúc khác</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Gửi lời chúc đến thầy cô</h2>
+
+    <form id="form">
+      <input id="name" maxlength="32" placeholder="Tên của bạn / Tập thể lớp" required>
+      <textarea id="message" maxlength="180" placeholder="Viết lời chúc của bạn..." required></textarea>
+      <button type="submit">GỬI LỜI CHÚC ♥</button>
+    </form>
+
+    <p id="status"></p>
+
+    <h3 class="qr-title">Quét QR để gửi lời chúc</h3>
+    <div id="qrcode"></div>
+
+    <p>
+      <button id="copy" class="copy-button" type="button">Sao chép đường link</button>
+    </p>
+  </section>
+</main>
+
+<section class="guestbook-section">
+  <h2>📖 Sổ lưu bút kỷ niệm</h2>
+  <p class="guestbook-intro">Hãy lưu lại những khoảnh khắc và kỷ niệm đáng nhớ bên thầy cô, bạn bè nhé! ♥</p>
+
+  <form id="guestbookForm" class="guestbook-form">
+    <input id="guestName" maxlength="40" placeholder="Tên của bạn" required>
+    <input id="guestClass" maxlength="30" placeholder="Lớp của bạn">
+    <textarea id="guestMemory" maxlength="2000" placeholder="Viết kỷ niệm của bạn..." required></textarea>
+
+    <label for="guestPhotos">📷 Chọn ảnh kỷ niệm</label>
+    <input id="guestPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+    <p class="photo-hint">Có thể chọn tối đa 5 ảnh, mỗi ảnh không quá 5 MB.</p>
+
+    <button type="submit">LƯU KỶ NIỆM ♥</button>
+  </form>
+
+  <p id="guestbookStatus"></p>
+  <h2>♥ Những kỷ niệm được chia sẻ ♥</h2>
+
+  <div id="guestbookList" class="guestbook-list">
+    <div class="guestbook-empty">Đang tải những kỷ niệm...</div>
+  </div>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+
 let allMessages = [];
 let lastRandomIndex = -1;
 let lastRenderedData = "";
@@ -37,40 +464,31 @@ $("copy").onclick = async () => {
 
 /* XẾP LỜI CHÚC THÀNH HÌNH TRÁI TIM */
 function getHeartSlots(count, cols) {
-  // Tăng số hàng theo số lời chúc để các note phủ đều hình trái tim.
-  let rows = Math.max(6, Math.ceil(count * 1.35));
+  let rows = 5;
   let slots = [];
 
-  while (rows <= 180) {
+  while (rows <= 120) {
     slots = [];
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        // Tọa độ chuẩn hóa trong vùng hình trái tim.
         const x = ((c + 0.5) / cols) * 2.6 - 1.3;
-        const y = 1.2 - ((r + 0.5) / rows) * 2.4;
+        const y = 1.15 - ((r + 0.5) / rows) * 2.3;
 
-        // Phương trình tạo hình trái tim.
-        const heart = Math.pow(x * x + y * y - 1, 3)
-          - x * x * Math.pow(y, 3);
+        const value = Math.pow(x * x + y * y - 1, 3) - x * x * Math.pow(y, 3);
 
-        if (heart <= 0) slots.push({ row: r, col: c });
+        if (value <= 0) slots.push({ row: r, col: c });
       }
     }
 
     if (slots.length >= count) break;
-    rows += 2;
+    rows++;
   }
 
-  // Trường hợp chỉ có một lời chúc.
   if (count === 1) {
-    return {
-      rows,
-      slots: [{ row: Math.floor(rows * 0.45), col: Math.floor(cols / 2) }]
-    };
+    return { rows, slots: [{ row: Math.floor(rows / 2), col: Math.floor(cols / 2) }] };
   }
 
-  // Lấy các vị trí trải đều từ trên xuống dưới, trái sang phải.
   const selected = [];
   for (let i = 0; i < count; i++) {
     const index = Math.round(i * (slots.length - 1) / (count - 1));
@@ -113,7 +531,7 @@ async function loadMessages() {
     const layout = getHeartSlots(messages.length, cols);
 
     box.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
-    box.style.gridTemplateRows = `repeat(${layout.rows}, minmax(72px, auto))`;
+    box.style.gridTemplateRows = `repeat(${layout.rows}, minmax(105px, auto))`;
     box.replaceChildren();
 
     messages.forEach((m, index) => {
@@ -382,3 +800,4 @@ setInterval(createFloatingHeart, 650);
 
 </body>
 </html>
+```
